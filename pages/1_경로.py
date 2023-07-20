@@ -1,5 +1,21 @@
 import streamlit as st
 
+# import data analysis modules
+import pandas as pd
+
+# import map visualization module
+import folium
+
+# GIS modules
+import networkx as nx
+import osmnx as ox
+import geopandas as gpd
+
+# import another modules
+import json
+import requests
+import math
+
 ## 병원 도출 함수
 def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, center: 현재 위치
   df_distance = pd.DataFrame()
