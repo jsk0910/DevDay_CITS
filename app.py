@@ -75,6 +75,38 @@ def makeGraph():
   st.session_state.G_A = G_A
   st.session_state.G_B = G_B
 
+def getDepartment():
+  if 'G_A' in st.session_state or 'G_B' in st.session_state:
+    G_A = st.session_state.G_A
+    G_B = st.session_state.G_B
+    possible_departments = []
+    
+    if code[0] == "A":
+      for node in G_A.nodes:
+        if code in node:
+          data = list(dict(G_A[node]).keys())
+          for d in data:
+            d.split(', ')
+            for i in d:
+              possible_departments.append(d)
+      elif code[0] == "B":
+        for node in G_B.nodes:
+          if code in node:
+            data = list(dict(G_B[node]).keys())
+            for d in data:
+              d.split(', ')
+              for i in d:
+                possible_departments.append(d)
+
+    departments = []
+
+    for p in possible_departments:
+      data = p.split(', ')
+      for d in data:
+        if d in departments:
+          break
+        departments.append(d)
+
 def main():
   ## Streamlit App Setting
   st.title('C-ITS')
@@ -135,35 +167,8 @@ if __name__ == "__main__":
     
   
 """
-code = step3
-
-possible_departments = []
-
-if code[0] == "A":
-  for node in G_A.nodes:
-    if code in node:
-      data = list(dict(G_A[node]).keys())
-      for d in data:
-        d.split(', ')
-        for i in d:
-          possible_departments.append(d)
-elif code[0] == "B":
-  for node in G_B.nodes:
-    if code in node:
-      data = list(dict(G_B[node]).keys())
-      for d in data:
-        d.split(', ')
-        for i in d:
-          possible_departments.append(d)
           
-departments = []
 
-for p in possible_departments:
-  data = p.split(', ')
-  for d in data:
-    if d in departments:
-      break
-    departments.append(d)
 
 ## 병원 도출 함수
 def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, center: 현재 위치
