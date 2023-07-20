@@ -104,6 +104,8 @@ if 'departments' in st.session_state:
   except:
     min = st.session_state.min
 
+st.write(min)
+
 if 'r' not in st.session_state or address != st.session_state.old_address:
   orig = st.session_state.orig
   r = routeHospital(G, orig, [[min.iloc[0]['경도'], min.iloc[0]['위도']],[min.iloc[1]['경도'], min.iloc[1]['위도']], [min.iloc[2]['경도'], min.iloc[2]['위도']]])
