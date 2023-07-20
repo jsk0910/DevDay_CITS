@@ -101,6 +101,10 @@ def main():
 if __name__ == "__main__":
   if 'df_A' not in st.session_state or 'df_B' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state:
     readData()
+  df_A = st.session_state.df_A
+  df_B = st.session_state.df_B
+  df_code = st.session_state.df_code
+  df_hospital = st.session_state.df_hospital
   if 'G_A' not in st.session_state or 'G_B' not in st.session_state:
     makeGraph()
   main()
