@@ -114,6 +114,7 @@ def getDepartment():
       label += ", "
     label = label[:-2] + "입니다."
     st.write(label)
+    st.session_state.departments = departments
     
 def main():
   ## Streamlit App Setting
