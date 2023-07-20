@@ -36,8 +36,10 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
       x = (math.cos(center[0]) * 6400 * 2 * 3.14 / 360) * abs(center[1] - float(row['경도']))
       distance = math.sqrt(x*x + y*y)
       distance_list.append(distance)
+  st.write(distance)
 
   df_distance['distance'] = distance_list
+  st.write(df_distance)
 
   return df_distance
 
