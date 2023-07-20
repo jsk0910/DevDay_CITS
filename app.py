@@ -79,7 +79,8 @@ if age == '15세 이상의 성인':
     '환자의 응급상황 정보를 선택해주세요.',
     (tuple(step3_list.values.tolist())))
   for i in step3:
-    st.write(i)
+    step3_values += i
+  st.write(step3_values)
 
 code = step3
 
