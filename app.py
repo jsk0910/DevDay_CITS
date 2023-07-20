@@ -112,7 +112,7 @@ def getDepartment():
     for i in departments:
       label += i
       label += ", "
-    label += "입니다."
+    label = label[:-2] + "입니다."
     st.write(label)
     
 def main():
