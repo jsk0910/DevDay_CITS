@@ -102,7 +102,7 @@ def main():
     step2 = step3_list[step3_list['3단계'].str.contains(keyword2[:-1])]
     mergeCode = "A" + step2["2단계 코드"] + step2["3단계 코드"] + step2["4단계 코드"]
     st.write(mergeCode)
-  elif age == '15세 이상의 아동':
+  elif age == '15세 미만의 아동':
     step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄워쓰기로 구분)')
     step4 = step4.split(" ")
     keyword = ""
