@@ -89,7 +89,7 @@ orig = st.session_state.orig
 
 style = {'color': '#1A19AC', 'weight':'1'}
 
-min = df_hospital_distance[df_hospital_distance['distance'].min()]
+min = df_hospital_distance[df_hospital_distance['distance'] == df_hospital_distance['distance'].min()]
 st.write(min)
 if 'r' not in st.session_state or address != st.session_state.old_address:
   r = routeHospital(G, orig, 129.18199, 35.173516)
