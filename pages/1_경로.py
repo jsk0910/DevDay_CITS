@@ -49,6 +49,8 @@ def routeHospital(G, orig, destX, destY):
   # fig, ax = ox.plot_graph(G, node_size=0, edge_linewidth=0.5)
 
   dest = ox.distance.nearest_nodes(G, X=destX, Y=destY)
+  st.write(orig)
+  st.write(dest)
   route = ox.shortest_path(G, orig, dest, weight="travel_time")
   r = ox.plot_route_folium(G, route, popup_attribute='length')
   return r
