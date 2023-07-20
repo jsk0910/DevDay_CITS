@@ -42,12 +42,15 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
   return df_distance
 
 ## 최단 경로 시각화
-def routeHospital(G, orig, destX, destY):
-
-  # fig, ax = ox.plot_graph(G, node_size=0, edge_linewidth=0.5)
-  dest = ox.distance.nearest_nodes(G, X=destX, Y=destY)
-  route = ox.shortest_path(G, orig, dest[0], weight="travel_time")
-  r = ox.plot_route_folium(G, route, popup_attribute='length')
+def routeHospital(G, orig, destInfo):
+  routes = []
+  dest1 = ox.distance.nearest_nodes(G, X=dest[0][0], Y=dest[0][1])
+  dest2 = ox.distance.nearest_nodes(G, X=dest[1][0], Y=dest[1][1])
+  dest3 = ox.distance.nearest_nodes(G, X=dest[2][0], Y=dest[2][1])
+  routes.append(ox.shortest_path(G, orig, dest1, weight="travel_time"))
+  routes.append(ox.shortest_path(G, orig, dest2, weight="travel_time"))
+  routes.append(ox.shortest_path(G, orig, dest3, weight="travel_time"))
+  r = ox.plot_route_folium(G, routes, popup_attribute='length')
   return r
 
 htmlTitle = """
@@ -89,7 +92,7 @@ min = df_hospital_distance.sort_values(by="distance")
 
 if 'r' not in st.session_state or address != st.session_state.old_address:
   orig = st.session_state.orig
-  r = routeHospital(G, orig, min['경도'], min['위도'])
+  r = routeHospital(G, orig, [[min.iloc[0]['경도'], min.iloc[0]['위도']],[min.iloc[1]['경도'], min.iloc[1]['위도']], [min.iloc[2]['경도'], min.iloc[2]['위도']]])
   for _, row in df_hospital.iterrows():
     folium.Marker(location = [row['위도'], row['경도']],
             popup=row['의료기관명'],
