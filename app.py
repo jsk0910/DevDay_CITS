@@ -56,8 +56,19 @@ for idx, row in df_A.iterrows():
 for idx, row in df_B.iterrows():
   G_B.add_edge("B" + row['2단계 코드'] + row['3단계 코드'] + row['4단계 코드'], row['2단계'])
 
-code = input()
+## Streamlit App Setting
+st.title('C-ITS')
+st.subheader('Made By SobanGchA (소 방 차)')
 
+age = st.selectbox(
+    '환자의 나이를 골라주세요.',
+    ('15세 이상의 성인', '15세 미만의 아동'))
+if age == '15세 이상의 성인'
+"""
+step4 = st.text_input('증상의 키워드를 입력하세요 (여러개일 경우, 띄워쓰기로 구분)', '열 쇼크')
+for i in range(
+code = input()
+"""
 possible_departments = []
 
 if code[0] == "A":
@@ -105,16 +116,12 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
 
   return df_distance
 
-
-## Streamlit App Setting
-st.title('C-ITS')
-st.subheader('Made By SobanGchA (소 방 차)')
-
+"""
 ## 병원 위치 시각화
 address = st.text_input('현재 위치를 입력하세요. (도로명 주소)', '부산광역시 사하구 낙동대로550번길 37')
 # address = input()
 
-"""
+
 center = list(ox.geocode(address))
 G = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
 orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
