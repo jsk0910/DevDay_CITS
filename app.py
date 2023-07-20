@@ -168,10 +168,6 @@ if __name__ == "__main__":
     makeGraph()
   main()
     
-  
-"""
-          
-
 
 ## 병원 도출 함수
 def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, center: 현재 위치
@@ -191,12 +187,10 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
   df_distance['distance'] = distance_list
 
   return df_distance
-"""
-"""
+
 ## 병원 위치 시각화
 address = st.text_input('현재 위치를 입력하세요. (도로명 주소)', '부산광역시 사하구 낙동대로550번길 37')
 # address = input()
-
 
 center = list(ox.geocode(address))
 G = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
@@ -223,4 +217,3 @@ for _, row in df_hospital.iterrows():
             tooltip=row['의료기관명'],
             icon=folium.Icon(color='red',icon='plus')
           ).add_to(r)
-"""
