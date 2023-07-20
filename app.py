@@ -73,11 +73,11 @@ if age == '15세 이상의 성인':
     keyword += '|'
   step3_list = df_A[df_A['4단계'].str.contains(keyword[:-1])]
   st.write(step3_list)
-  step3_list = step3_list["3단계"].drop_duplicates()
-  st.write(step3_list)
+  step3_list_2 = step3_list["3단계"].drop_duplicates()
+  st.write(step3_list_2)
   step3 = st.multiselect(
     '환자의 응급상황 정보를 선택해주세요.',
-    (tuple(step3_list.values.tolist())))
+    (tuple(step3_list_2.values.tolist())))
   keyword2 = ""
   for i in step3:
     keyword2 += str(i)
