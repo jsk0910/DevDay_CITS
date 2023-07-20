@@ -80,9 +80,9 @@ if age == '15세 이상의 성인':
     (tuple(step3_list.values.tolist())))
   st.write(type(step3))
   for i in step3:
-    keyword += str(i)
-    keyword += '|'
-  step2 = step3_list[step3_list['3단계'].str.contains(keyword[:-1])]
+    keyword2 += str(i)
+    keyword2 += '|'
+  step2 = step3_list[step3_list['3단계'].str.contains(keyword2[:-1])]
   st.write(step2)
 
 
