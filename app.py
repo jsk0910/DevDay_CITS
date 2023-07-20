@@ -65,13 +65,14 @@ age = st.selectbox(
     '환자의 나이를 골라주세요.',
     ('15세 이상의 성인', '15세 미만의 아동'))
 if age == '15세 이상의 성인':
-  step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄워쓰기로 구분)', '열 쇼크')
+  step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄워쓰기로 구분)')
   step4 = step4.split(" ")
   step3_list = df_A[df_A['4단계'].isin(step4)]
   step3_list = step3_list["3단계"].drop_duplicates()
   step3 = st.selectbox(
     '환자의 응급상황 정보를 선택해주세요.',
     (tuple(step3_list.values.tolist())))
+
   
 
 
