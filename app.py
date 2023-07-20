@@ -1,25 +1,31 @@
+# --- import modules start ---
+# import streamlit 
 import streamlit as st
-# data
+# import data analysis modules
 import pandas as pd
 import matplotlib.cm as cm
 import matplotlib.colors as colors
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
+
+# import mongodb module
+import pymongo
+
+# import map visualization module
+import folium
+
+# GIS modules
+import networkx as nx
+import osmnx as ox
+import geopandas as gpd
+
+# import another modules
 import json
 import requests
 import math
 
-# mongodb
-import pymongo
-
-# map
-import folium
-
-# GIS
-import networkx as nx
-import osmnx as ox
-import geopandas as gpd
+# --- import modules end ---
 
 # func: read Data from Repository
 def readData():
