@@ -18,6 +18,14 @@ import json
 import requests
 import math
 
+# func: address to lat, lon
+def addr_to_lat_lon(addr):
+  url = f"https://dapi.kakao.com/v2/local/search/address.json?query={addr}"
+  headers = {"Authorization": "KakaoAK " + st.secrets.KEY.KAKAO_KEY}
+  result = json.loads(str(requests.get(url, headers=headers).text))
+  match_first = result['documents'][0]['address']
+  return float(match_first['y']), float(match_first['x'])
+
 ## 병원 도출 함수
 def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, center: 현재 위치
   df_distance = pd.DataFrame()
@@ -52,7 +60,7 @@ st.write('경로 시각화 부분')
 address = st.text_input('현재 위치를 입력하세요. (도로명 주소)', '부산광역시 사하구 낙동대로550번길 37')
 df_hospital = st.session_state.df_hospital
 
-center = list(ox.geocode(address))
+center = list(addr_to_lat_lon(address))
 G = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
 orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
 G = ox.speed.add_edge_speeds(G)
