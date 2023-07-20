@@ -3,9 +3,6 @@ pymongo
 osmnx
 pandas
 matplotlib
-json
-requests
-math
-geopandas 
+geopandas
 networkx
 folium
