@@ -83,6 +83,7 @@ def getDepartment():
     possible_departments = []
 
     for idx, code in mergeCode.iterrows():
+      st.write(code)
       if code[0] == "A":
         for node in G_A.nodes:
           if code in node:
