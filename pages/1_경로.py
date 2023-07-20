@@ -92,7 +92,7 @@ style = {'color': '#1A19AC', 'weight':'1'}
 min = df_hospital_distance[df_hospital_distance['distance'] == df_hospital_distance['distance'].min()]
 st.write(min)
 if 'r' not in st.session_state or address != st.session_state.old_address:
-  r = routeHospital(G, orig, min['경도'], min['위도'])
+  r = routeHospital(G, orig, min['위도'], min['경도'])
   for _, row in df_hospital.iterrows():
     folium.Marker(location = [row['위도'], row['경도']],
             popup=row['의료기관명'],
