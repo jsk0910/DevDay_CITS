@@ -54,7 +54,10 @@ def routeHospital(G, orig, destX, destY):
   r = ox.plot_route_folium(G, route, popup_attribute='length')
   return r
 
-st.write('경로 시각화 부분')
+htmlTitle = """
+<div><h3>🎈Hello World!</h3></div>
+"""
+st.markdown(html, unsafe_allow_html=True)
 ## 병원 위치 시각화
 address = st.text_input('현재 위치를 입력하세요. (도로명 주소)', '부산광역시 사하구 낙동대로550번길 37')
 df_hospital = st.session_state.df_hospital
