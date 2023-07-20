@@ -21,7 +21,7 @@ import math
 # func: address to lat, lon
 def addr_to_lat_lon(addr):
   url = f"https://dapi.kakao.com/v2/local/search/address.json?query={addr}"
-  headers = {"Authorization": "KakaoAK " + st.secrets.KEY.KAKAO_KEY}
+  headers = {"Authorization": "KakaoAK " + st.secrets.KAKAOKEY}
   result = json.loads(str(requests.get(url, headers=headers).text))
   match_first = result['documents'][0]['address']
   return float(match_first['y']), float(match_first['x'])
