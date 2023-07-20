@@ -69,7 +69,6 @@ df_hospital = st.session_state.df_hospital
 if 'center' not in st.session_state or address != st.session_state.old_address:
   st.session_state.center = list(addr_to_lat_lon(address))
 center = st.session_state.center
-st.write(center)
 if 'df_hospital_distance' not in st.session_state or address != st.session_state.old_address:
   df_hospital_distance = calculate_distance(df_hospital)
   st.session_state.df_hospital_distance = df_hospital_distance
@@ -82,7 +81,7 @@ if 'G' not in st.session_state:
   st.session_state.G = G
 if 'orig' not in st.session_state or address != st.session_state.old_address:
   G = st.session_state.G
-  orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
+  orig = ox.distance.nearest_nodes(G, X=center[0], Y=center[1])
   st.session_state.orig = orig
 
 G = st.session_state.G
