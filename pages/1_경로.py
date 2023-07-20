@@ -96,8 +96,11 @@ st.session_state.min = min
 if 'departments' in st.session_state:
   departments = st.session_state.departments
   try:
-    st.write(departments)
-    min = min[min['진료과목'].map(lambda x: all(string in x for string in departments))]
+    depart = ""
+    for i in departments:
+      depart += i
+      depart += '|'
+    min = min[min['진료과목'].str.contains(depart[:-1])]
   except:
     min = st.session_state.min
 
