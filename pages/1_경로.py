@@ -116,8 +116,8 @@ if 'r' not in st.session_state or address != st.session_state.old_address:
           ).add_to(r)
   for i in range(3):
     folium.Marker(location = [min.iloc[i]['위도'], min.iloc[i]['경도']],
-                  popup = folium.Popup(min.iloc[i]['의료기관명'] + '\n'+
-                                      '전화번호:'+ min.iloc[i]['전화번호'] + '\n', width=150),
+                  popup = folium.Popup(f'{min.iloc[i]['의료기관명']}\n전화번호: {min.iloc[i]['전화번호']}\n,
+                  width=150),
                   tooltip = min.iloc[i]['의료기관명'],
                   icon=folium.Icon(color='blue', icon='plus')
                  ).add_to(r)
