@@ -36,7 +36,7 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
       x = (math.cos(center[0]) * 6400 * 2 * 3.14 / 360) * abs(center[1] - float(row['경도']))
       distance = math.sqrt(x*x + y*y)
       st.write(distance)
-      if distance <= 3.0:
+      if distance <= 6.0:
         df_distance = pd.concat([df_distance, df[df['위도'] == row['위도']&df['경도'] == row['경도']]])
         distance_list.append(distance)
 
