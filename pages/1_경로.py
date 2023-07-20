@@ -30,6 +30,7 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
   df_distance = pd.DataFrame()
   distance_list = []
   for i in df.iterrows():
+    st.write(i)
     if i != None:
       #i = list(i)
       y = abs(center[0] - float(i['위도'])) * 111
