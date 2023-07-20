@@ -105,8 +105,6 @@ if 'departments' in st.session_state:
   except:
     min = st.session_state.min
 
-st.write(min)
-
 if 'r' not in st.session_state or address != st.session_state.old_address:
   orig = st.session_state.orig
   r = routeHospital(G, orig, [[min.iloc[0]['경도'], min.iloc[0]['위도']],[min.iloc[1]['경도'], min.iloc[1]['위도']], [min.iloc[2]['경도'], min.iloc[2]['위도']]])
@@ -118,7 +116,8 @@ if 'r' not in st.session_state or address != st.session_state.old_address:
           ).add_to(r)
   for i in range(3):
     folium.Marker(location = [min.iloc[i]['위도'], min.iloc[i]['경도']],
-                  popup = min.iloc[i]['의료기관명'],
+                  popup = folium.Popup(min.iloc[i]['의료기관명'] + '\n'+
+                                      '전화번호: min.iloc[i]['전화번호']\n', width=150),
                   tooltip = min.iloc[i]['의료기관명'],
                   icon=folium.Icon(color='blue', icon='plus')
                  ).add_to(r)
