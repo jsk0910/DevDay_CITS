@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_folium import st_folium
 
 # import data analysis modules
 import pandas as pd
@@ -57,10 +58,11 @@ G = ox.speed.add_edge_travel_times(G)
 
 style = {'color': '#1A19AC', 'weight':'1'}
 
-r= routeHospital(G, orig, 129.18199, 35.173516)
+r = routeHospital(G, orig, 129.18199, 35.173516)
 for _, row in df_hospital.iterrows():
     folium.Marker(location = [row['위도'], row['경도']],
             popup=row['의료기관명'],
             tooltip=row['의료기관명'],
             icon=folium.Icon(color='red',icon='plus')
           ).add_to(r)
+st_folium(r, returned_object=[])
