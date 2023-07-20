@@ -45,7 +45,7 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
 def routeHospital(G, orig, destX, destY):
 
   # fig, ax = ox.plot_graph(G, node_size=0, edge_linewidth=0.5)
-
+  st.write(center)
   dest = ox.distance.nearest_nodes(G, X=destX, Y=destY)
   orig = ox.distance.nearest_nodes(G, X=center[0], Y=center[1])
   route = ox.shortest_path(G, orig, dest, weight="travel_time")
