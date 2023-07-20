@@ -61,7 +61,7 @@ st.markdown(htmlTitle, unsafe_allow_html=True)
 address = st.text_input('현재 위치를 입력하세요. (도로명 주소)', '부산광역시 사하구 낙동대로550번길 37')
 if 'address' not in st.session_state:
   st.session_state.address = address
-else:
+elif address != st.session_state.address:
   st.session_state.old_address = st.session_state.address
   st.session_state.address = address
 df_hospital = st.session_state.df_hospital
