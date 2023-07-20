@@ -50,6 +50,7 @@ def routeHospital(G, orig, dest):
   routes.append(ox.shortest_path(G, orig, dest1, weight="travel_time"))
   routes.append(ox.shortest_path(G, orig, dest2, weight="travel_time"))
   routes.append(ox.shortest_path(G, orig, dest3, weight="travel_time"))
+  st.write(routes)
   r = ox.plot_route_folium(G, routes, popup_attribute='length')
   return r
 
