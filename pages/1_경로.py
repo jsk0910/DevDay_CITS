@@ -120,4 +120,4 @@ if 'r' not in st.session_state or address != st.session_state.old_address:
   st.session_state.r = r
 r = st.session_state.r
 
-st_folium(r, returned_objects=[])
+st_folium(r, width="500px", returned_objects=[])
