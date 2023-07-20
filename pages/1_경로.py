@@ -27,7 +27,7 @@ def addr_to_lat_lon(addr):
 
 # 병원 도출 함수
 def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, center: 현재 위치
-  df_distance = pd.DataFrame()
+  df_distance = df
   distance_list = []
   for i, row in df.iterrows():
     if row is not None:
@@ -35,12 +35,8 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
       y = abs(center[0] - float(row['위도'])) * 111
       x = (math.cos(center[0]) * 6400 * 2 * 3.14 / 360) * abs(center[1] - float(row['경도']))
       distance = math.sqrt(x*x + y*y)
-      if distance <= 6.0:
-        df_distance = pd.concat([df_distance, df[df['위도'] == row['위도']&df['경도'] == row['경도']]])
-        st.write(df_distance)
-        distance_list.append(distance)
+      distance_list.append(distance)
 
-  df_distance = df_distance.drop_duplicates()
   df_distance['distance'] = distance_list
 
   return df_distance
@@ -73,7 +69,6 @@ if 'center' not in st.session_state or address != st.session_state.old_address:
 center = st.session_state.center
 if 'df_hospital_distance' not in st.session_state or address != st.session_state.old_address:
   df_hospital_distance = calculate_distance(df_hospital)
-  st.write(df_hospital_distance)
   st.session_state.df_hospital_distance = df_hospital_distance
 df_hospital_distance = st.session_state.df_hospital_distance
 st.write(df_hospital_distance)
