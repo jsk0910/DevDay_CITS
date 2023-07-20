@@ -20,6 +20,124 @@ import networkx as nx
 import osmnx as ox
 import geopandas as gpd
 
-df_A = pd.read_csv('/content/drive/MyDrive/데브데이2023/01 개발파일/data/응급환자_중증도_분류기준.csv', encoding='CP949')
-df_B = pd.read_csv('/content/drive/MyDrive/데브데이2023/01 개발파일/data/응급환자_중증도_분류기준B.csv')
-df_code = pd.read_csv('/content/drive/MyDrive/데브데이2023/01 개발파일/data/감염여부_코드.csv')
+## 데이터 불러오기
+df_A = pd.read_csv('data/응급환자_중증도_분류기준.csv', encoding='CP949')
+df_B = pd.read_csv('data/응급환자_중증도_분류기준B.csv')
+df_code = pd.read_csv('data/감염여부_코드.csv')
+df_hospital = pd.read_csv('data/hospital.csv')
+
+## 데이터 전처리
+df_A.rename(columns={'2단계　': '2단계','Unnamed: 1': '2단계 코드', '3단계　': '3단계', 'Unnamed: 3': '3단계 코드', 'Unnamed: 5': '4단계 코드'}, inplace=True)
+df_A.replace('물질오용', '정신과, 신경과', inplace=True)
+df_A.replace('정신건강', '정신과', inplace=True)
+df_A.replace('코질환', '이비인후과', inplace=True)
+df_A.replace('귀질환', '이비인후과', inplace=True)
+df_A.replace('호흡기', '호흡기과, 흉부내과', inplace=True)
+df_A.replace('심혈관', '심장내과', inplace=True)
+df_A.replace('소화기', '소화기내과', inplace=True)
+df_A.replace('피부', '피부과', inplace=True)
+
+df_B.rename(columns={'2단계　': '2단계', 'Unnamed: 1': '2단계 코드', '3단계　': '3단계', 'Unnamed: 3': '3단계 코드', '4단계　': '4단계', 'Unnamed: 5': '4단계 코드'}, inplace=True)
+df_B.replace('물질오용', '정신과, 신경과', inplace=True)
+df_B.replace('정신건강', '정신과', inplace=True)
+df_B.replace('코질환', '이비인후과', inplace=True)
+df_B.replace('ㅂ귀질환', '이비인후과', inplace=True)
+df_B.replace('호흡기', '호흡기과, 흉부내과', inplace=True)
+df_B.replace('심혈관', '심장내과', inplace=True)
+df_B.replace('소화기', '소화기내과', inplace=True)
+df_B.replace('피부', '피부과', inplace=True)
+
+## 진료과 도출
+G_A = nx.Graph() # 15세 이상에 대한 그래프
+G_B = nx.Graph() # 15세 미만에 대한 그래프
+
+for idx, row in df_A.iterrows():
+  G_A.add_edge("A" + row['2단계 코드'] + row['3단계 코드'] + row['4단계 코드'], row['2단계'])
+for idx, row in df_B.iterrows():
+  G_B.add_edge("B" + row['2단계 코드'] + row['3단계 코드'] + row['4단계 코드'], row['2단계'])
+
+code = input()
+
+possible_departments = []
+
+if code[0] == "A":
+  for node in G_A.nodes:
+    if code in node:
+      data = list(dict(G_A[node]).keys())
+      for d in data:
+        d.split(', ')
+        for i in d:
+          possible_departments.append(d)
+elif code[0] == "B":
+  for node in G_B.nodes:
+    if code in node:
+      data = list(dict(G_B[node]).keys())
+      for d in data:
+        d.split(', ')
+        for i in d:
+          possible_departments.append(d)
+          
+departments = []
+
+for p in possible_departments:
+  data = p.split(', ')
+  for d in data:
+    if d in departments:
+      break
+    departments.append(d)
+
+## 병원 도출 함수
+def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, center: 현재 위치
+  df_distance = pd.DataFrame()
+  distance_list = []
+  for i in df['latlon']:
+    if i != None:
+      i = list(i)
+      y = abs(center[0] - float(i[0])) * 111
+      x = (math.cos(center[0]) * 6400 * 2 * 3.14 / 360) * abs(center[1] - float(i[1]))
+      distance = math.sqrt(x*x + y*y)
+      if distance <= 3.0:
+        df_distance = pd.concat([df_distance, df[df['latlon'] == tuple(i)]])
+        distance_list.append(distance)
+
+  df_distance = df_distance.drop_duplicates()
+  df_distance['distance'] = distance_list
+
+  return df_distance
+
+
+## Streamlit App Setting
+st.title('C-ITS')
+st.subheader('Made By SobanGchA (소 방 차)')
+
+## 병원 위치 시각화
+address = st.text_input('현재 위치를 입력하세요. (도로명 주소)', '부산광역시 사하구 낙동대로550번길 37')
+# address = input()
+
+"""
+center = list(ox.geocode(address))
+G = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
+orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
+G = ox.speed.add_edge_speeds(G)
+G = ox.speed.add_edge_travel_times(G)
+
+## 최단 경로 시각화
+def routeHospital(G, orig, destX, destY):
+
+  # fig, ax = ox.plot_graph(G, node_size=0, edge_linewidth=0.5)
+
+  dest = ox.distance.nearest_nodes(G, X=destX, Y=destY)
+  route = ox.shortest_path(G, orig, dest, weight="travel_time")
+  r = ox.plot_route_folium(G, route, popup_attribute='length')
+  return r
+
+style = {'color': '#1A19AC', 'weight':'1'}
+
+r= routeHospital(G, orig, 129.18199, 35.173516)
+for _, row in df_hospital.iterrows():
+    folium.Marker(location = [row['위도'], row['경도']],
+            popup=row['의료기관명'],
+            tooltip=row['의료기관명'],
+            icon=folium.Icon(color='red',icon='plus')
+          ).add_to(r)
+"""
