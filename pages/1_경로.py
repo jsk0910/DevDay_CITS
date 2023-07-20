@@ -25,7 +25,7 @@ def addr_to_lat_lon(addr):
   match_first = result['documents'][0]['address']
   return float(match_first['y']), float(match_first['x'])
 
-## 병원 도출 함수
+# 병원 도출 함수
 def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, center: 현재 위치
   df_distance = pd.DataFrame()
   distance_list = []
@@ -65,6 +65,10 @@ df_hospital = st.session_state.df_hospital
 if 'center' not in st.session_state:
   st.session_state.center = list(addr_to_lat_lon(address))
 center = st.session_state.center
+if 'df_hospital_distance' not in st.session_state:
+  df_hospital_distance = calculate_distance(hospital)
+  st.session_state.df_hospital_distance = df_hospital_distance
+df_hospital_distance = st.session_state.df_hospital_distance
 
 if 'G' not in st.session_state:
   G = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
