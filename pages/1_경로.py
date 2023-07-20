@@ -42,7 +42,7 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
   return df_distance
 
 ## 최단 경로 시각화
-def routeHospital(G, orig, destInfo):
+def routeHospital(G, orig, dest):
   routes = []
   dest1 = ox.distance.nearest_nodes(G, X=dest[0][0], Y=dest[0][1])
   dest2 = ox.distance.nearest_nodes(G, X=dest[1][0], Y=dest[1][1])
