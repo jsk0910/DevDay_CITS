@@ -103,6 +103,8 @@ def main():
       keyword2 += '|'
     step2 = step3_list[step3_list['3단계'].str.contains(keyword2[:-1])]
     st.write(step2)
+    mergeCode = "A" + step3_list["2단계 코드"] + step3_list["3단계 코드"] + step3_list["4단계 코드"]
+    st.write(mergeCode)
 
 if __name__ == "__main__":
   if 'df_A' not in st.session_state or 'df_B' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state:
