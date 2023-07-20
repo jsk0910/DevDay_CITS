@@ -91,9 +91,7 @@ def main():
       keyword += str(i)
       keyword += '|'
     step3_list = df_A[df_A['4단계'].str.contains(keyword[:-1])]
-    st.write(step3_list)
     step3_list_2 = step3_list["3단계"].drop_duplicates()
-    st.write(step3_list_2)
     step3 = st.multiselect(
       '환자의 응급상황 정보를 선택해주세요.',
       (tuple(step3_list_2.values.tolist())))
@@ -102,7 +100,6 @@ def main():
       keyword2 += str(i)
       keyword2 += '|'
     step2 = step3_list[step3_list['3단계'].str.contains(keyword2[:-1])]
-    st.write(step2)
     mergeCode = "A" + step2["2단계 코드"] + step2["3단계 코드"] + step2["4단계 코드"]
     st.write(mergeCode)
 
