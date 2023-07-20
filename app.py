@@ -82,7 +82,7 @@ def getDepartment():
     G_B = st.session_state.G_B
     possible_departments = []
 
-    for idx, code in mergeCode:
+    for idx, code in mergeCode.iterrows():
       if code[0] == "A":
         for node in G_A.nodes:
           if code in node:
