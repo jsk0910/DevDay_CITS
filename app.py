@@ -108,6 +108,7 @@ def getDepartment():
         if d in departments:
           break
         departments.append(d)
+    st.write(departments)
 
 def main():
   ## Streamlit App Setting
