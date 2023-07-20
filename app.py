@@ -84,8 +84,6 @@ if age == '15세 이상의 성인':
     keyword2 += '|'
   step2 = step3_list[step3_list['3단계'].str.contains(keyword2[:-1])]
   st.write(step2)
-  step2_2 = step2.drop_duplicates()
-  st.write(step2_2)
 
   
 
