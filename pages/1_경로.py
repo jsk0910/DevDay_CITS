@@ -82,6 +82,7 @@ if 'G' not in st.session_state:
 if 'orig' not in st.session_state or address != st.session_state.old_address:
   G = st.session_state.G
   orig = ox.distance.nearest_nodes(G, X=center[0], Y=center[1])
+  st.write(orig)
   st.session_state.orig = orig
 
 G = st.session_state.G
