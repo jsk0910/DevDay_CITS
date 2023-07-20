@@ -85,9 +85,8 @@ G = st.session_state.G
 orig = st.session_state.orig
 
 style = {'color': '#1A19AC', 'weight':'1'}
-st.write(df_hospital_distance.sort_values(by="distance"))
-min = df_hospital_distance[df_hospital_distance['distance'] == df_hospital_distance['distance'].min(level=0)]
-st.write(min)
+min = df_hospital_distance.sort_values(by="distance")
+
 if 'r' not in st.session_state or address != st.session_state.old_address:
   orig = st.session_state.orig
   r = routeHospital(G, orig, min['경도'], min['위도'])
@@ -97,11 +96,12 @@ if 'r' not in st.session_state or address != st.session_state.old_address:
             tooltip=row['의료기관명'],
             icon=folium.Icon(color='red',icon='plus')
           ).add_to(r)
-  folium.Marker(location = [min['위도'], min['경도']],
-                popup = min['의료기관명'],
-                tooltip = min['의료기관명'],
-                icon=folium.Icon(color='blue', icon='plus')
-               ).add_to(r)
+  for i in range(3):
+    folium.Marker(location = [min.iloc[i]['위도'], min.iloc[i]['경도']],
+                  popup = min.iloc[i]['의료기관명'],
+                  tooltip = min.iloc[i]['의료기관명'],
+                  icon=folium.Icon(color='blue', icon='plus')
+                 ).add_to(r)
   folium.Marker(location = [center[0], center[1]],
                 popup = "출발지",
                 tooltip = "출발지",
