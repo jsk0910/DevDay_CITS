@@ -50,7 +50,7 @@ def routeHospital(G, orig, dest):
   route2 = ox.shortest_path(G, orig, dest2, weight="travel_time")
   route3 = ox.shortest_path(G, orig, dest3, weight="travel_time")
   
-  r = ox.plot_route_folium(G, route1, popup_attribute='length', route_color="orange")
+  r = ox.plot_route_folium(G, route1, popup_attribute='length', zoom=13, route_color="orange")
   r = ox.plot_route_folium(G, route2, route_map=r, popup_attribute='length', edge_color="orange")
   r = ox.plot_route_folium(G, route3, route_map=r, popup_attribute='length')
   return r
