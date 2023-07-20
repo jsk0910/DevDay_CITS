@@ -6,3 +6,4 @@ matplotlib
 geopandas
 networkx
 folium
+streamlit-folium
