@@ -91,14 +91,14 @@ def getDepartment():
               d.split(', ')
               for i in d:
                 possible_departments.append(d)
-        elif code[0] == "B":
-          for node in G_B.nodes:
-            if code in node:
-              data = list(dict(G_B[node]).keys())
-              for d in data:
-                d.split(', ')
-                for i in d:
-                  possible_departments.append(d)
+      elif code[0] == "B":
+        for node in G_B.nodes:
+          if code in node:
+            data = list(dict(G_B[node]).keys())
+            for d in data:
+              d.split(', ')
+              for i in d:
+                possible_departments.append(d)
 
     departments = []
 
