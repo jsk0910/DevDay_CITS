@@ -98,7 +98,11 @@ if 'departments' in st.session_state:
   try:
     depart = ""
     for d in departments:
+      depart += "("
       depart += d
+      depart += "|"
+      depart += d[-2]+d[-1]
+      depart += ")"
       depart += "&"
     min = min[min['진료과목'].str.contains(depart[:-1])]
   except:
