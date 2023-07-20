@@ -159,6 +159,8 @@ def main():
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
+  if 'old_address' not in st.session_state:
+    st.session_state.old_address = None
   if 'df_A' not in st.session_state or 'df_B' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state:
     readData()
   df_A = st.session_state.df_A
