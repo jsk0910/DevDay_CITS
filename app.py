@@ -108,8 +108,13 @@ def getDepartment():
         if d in departments:
           break
         departments.append(d)
-    st.write('도출된 진료과는 ' + i for i in departments + '입니다.')
-
+    label = "도출된 진료과는 "
+    for i in departments:
+      label += i
+      label += ", "
+    label += "입니다."
+    st.write(label)
+    
 def main():
   ## Streamlit App Setting
   st.title('C-ITS')
