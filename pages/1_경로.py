@@ -100,7 +100,8 @@ if 'departments' in st.session_state:
     for i in departments:
       depart += i
       depart += '|'
-    min = min[min['진료과목'].str.contains(depart[:-1])]
+    depart += '내과'
+    min = min[min['진료과목'].str.contains(depart)]
   except:
     min = st.session_state.min
 
