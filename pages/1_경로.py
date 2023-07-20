@@ -91,6 +91,7 @@ orig = st.session_state.orig
 
 style = {'color': '#1A19AC', 'weight':'1'}
 min = df_hospital_distance.sort_values(by="distance")
+st.write(min)
 
 if 'departments' in st.session_state:
   departments = st.session_state.departments
