@@ -46,8 +46,6 @@ def routeHospital(G, orig, destX, destY):
 
   # fig, ax = ox.plot_graph(G, node_size=0, edge_linewidth=0.5)
   dest = ox.distance.nearest_nodes(G, X=destX, Y=destY)
-  st.write(orig)
-  st.write(dest)
   route = ox.shortest_path(G, orig, dest[0], weight="travel_time")
   r = ox.plot_route_folium(G, route, popup_attribute='length')
   return r
@@ -87,8 +85,8 @@ G = st.session_state.G
 orig = st.session_state.orig
 
 style = {'color': '#1A19AC', 'weight':'1'}
-
-min = df_hospital_distance[df_hospital_distance['distance'] == df_hospital_distance['distance'].min()]
+st.write(df_hospital_distance.sort_values(by="distance"))
+min = df_hospital_distance[df_hospital_distance['distance'] == df_hospital_distance['distance'].min(level=0)]
 st.write(min)
 if 'r' not in st.session_state or address != st.session_state.old_address:
   orig = st.session_state.orig
