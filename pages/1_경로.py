@@ -1,6 +1,5 @@
 import streamlit as st
 from streamlit_folium import st_folium
-# from folium import plugins
 
 # import data analysis modules
 import pandas as pd
@@ -76,6 +75,5 @@ for _, row in df_hospital.iterrows():
             icon=folium.Icon(color='red',icon='plus')
           ).add_to(r)
 
-# plugins.LocateControl().add_to(r)
 st_folium(r, returned_objects=[])
 
