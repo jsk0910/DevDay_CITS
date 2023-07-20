@@ -104,6 +104,7 @@ if 'departments' in st.session_state:
       depart += d[-2]+d[-1]
       depart += ")"
       depart += "&"
+    st.write(depart)
     min = min[min['진료과목'].str.contains(depart[:-1])]
   except:
     min = st.session_state.min
