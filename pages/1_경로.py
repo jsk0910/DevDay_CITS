@@ -43,15 +43,14 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
 
 ## 최단 경로 시각화
 def routeHospital(G, orig, dest):
-  routes = []
   dest1 = ox.distance.nearest_nodes(G, X=dest[0][0], Y=dest[0][1])
   dest2 = ox.distance.nearest_nodes(G, X=dest[1][0], Y=dest[1][1])
   dest3 = ox.distance.nearest_nodes(G, X=dest[2][0], Y=dest[2][1])
-  routes.extend(ox.shortest_path(G, orig, dest1, weight="travel_time"))
-  routes.extend(ox.shortest_path(G, orig, dest2, weight="travel_time"))
-  routes.extend(ox.shortest_path(G, orig, dest3, weight="travel_time"))
-  st.write(routes)
-  r = ox.plot_route_folium(G, routes, popup_attribute='length')
+  route1 = ox.shortest_path(G, orig, dest1, weight="travel_time")
+  route2 = ox.shortest_path(G, orig, dest2, weight="travel_time")
+  route3 = ox.shortest_path(G, orig, dest3, weight="travel_time")
+  
+  r = ox.plot_route_folium(G, [route1, route2, route3], popup_attribute='length')
   return r
 
 htmlTitle = """
