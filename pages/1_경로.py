@@ -66,4 +66,4 @@ for _, row in df_hospital.iterrows():
             tooltip=row['의료기관명'],
             icon=folium.Icon(color='red',icon='plus')
           ).add_to(r)
-st_folium(r, returned_object=[])
+st_folium(r, returned_objects=[])
