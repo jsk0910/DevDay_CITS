@@ -107,6 +107,11 @@ if 'r' not in st.session_state or address != st.session_state.old_address:
                 tooltip = "출발지",
                 icon=folium.Icon(color='green')
                ).add_to(r)
+  folium.Marker(location = [df_hospital[df_hospital['의료기관명'] == '부산대학교병원']['위도'], df_hospital[df_hospital['의료기관명'] == '부산대학교병원']['경도']],
+                popup = "부산대학교 권역외상센터",
+                tooltip = "부산대학교 권역외상센터",
+                icon=folium.Icon(color='black', icon='star')
+               ).add_to(r)
   st.session_state.r = r
 r = st.session_state.r
 
