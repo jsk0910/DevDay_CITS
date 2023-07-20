@@ -60,9 +60,14 @@ htmlTitle = """
 st.markdown(htmlTitle, unsafe_allow_html=True)
 ## 병원 위치 시각화
 address = st.text_input('현재 위치를 입력하세요. (도로명 주소)', '부산광역시 사하구 낙동대로550번길 37')
+if 'address' not in st.session_state:
+  st.session_state.address
+else:
+  st.session_state.old_address = st.session_state.address
+  st.session_state.address = address
 df_hospital = st.session_state.df_hospital
 
-if 'center' not in st.session_state:
+if 'center' not in st.session_state or address != st.session_state.old_address:
   st.session_state.center = list(addr_to_lat_lon(address))
 center = st.session_state.center
 if 'df_hospital_distance' not in st.session_state:
@@ -75,7 +80,7 @@ if 'G' not in st.session_state:
   G = ox.speed.add_edge_speeds(G)
   G = ox.speed.add_edge_travel_times(G)
   st.session_state.G = G
-if 'orig' not in st.session_state:
+if 'orig' not in st.session_state or address != st.session_state.old_address:
   orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
   st.session_state.orig = orig
 
@@ -84,7 +89,7 @@ orig = st.session_state.orig
 
 style = {'color': '#1A19AC', 'weight':'1'}
 
-if 'r' not in st.session_state:
+if 'r' not in st.session_state or address != st.session_state.old_address:
   r = routeHospital(G, orig, 129.18199, 35.173516)
   for _, row in df_hospital.iterrows():
     folium.Marker(location = [row['위도'], row['경도']],
