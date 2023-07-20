@@ -80,7 +80,7 @@ if age == '15세 이상의 성인':
     (tuple(step3_list.values.tolist())))
   step3_values = []
   for i in step3:
-    step3_values += i
+    step3_values.append(i)
   st.write(step3_values)
 
 code = step3
