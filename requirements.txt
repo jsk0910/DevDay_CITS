@@ -7,3 +7,4 @@ geopandas
 networkx
 folium
 streamlit-folium
+scikit-learn
