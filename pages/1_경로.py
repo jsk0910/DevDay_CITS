@@ -106,7 +106,7 @@ if 'r' not in st.session_state or address != st.session_state.old_address:
                ).add_to(r)
   folium.Marker(location = [center[0], center[1]],
                 popup = "출발지",
-                tooltip = "출발지,
+                tooltip = "출발지",
                 icon=folium.Icon(color='green')
                ).add_to(r)
   st.session_state.r = r
