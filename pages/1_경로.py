@@ -73,7 +73,6 @@ if 'df_hospital_distance' not in st.session_state or address != st.session_state
   df_hospital_distance = calculate_distance(df_hospital)
   st.session_state.df_hospital_distance = df_hospital_distance
 df_hospital_distance = st.session_state.df_hospital_distance
-st.write(df_hospital_distance)
 
 if 'G' not in st.session_state:
   G = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
@@ -90,6 +89,8 @@ orig = st.session_state.orig
 
 style = {'color': '#1A19AC', 'weight':'1'}
 
+min = df_hospital_distance[df_hospital_distance['distance'].min()]
+st.write(min)
 if 'r' not in st.session_state or address != st.session_state.old_address:
   r = routeHospital(G, orig, 129.18199, 35.173516)
   for _, row in df_hospital.iterrows():
