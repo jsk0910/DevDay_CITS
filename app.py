@@ -76,27 +76,29 @@ def makeGraph():
   st.session_state.G_B = G_B
 
 def getDepartment():
+  mergeCode = st.session_state.mergeCode
   if 'G_A' in st.session_state or 'G_B' in st.session_state:
     G_A = st.session_state.G_A
     G_B = st.session_state.G_B
     possible_departments = []
-    
-    if code[0] == "A":
-      for node in G_A.nodes:
-        if code in node:
-          data = list(dict(G_A[node]).keys())
-          for d in data:
-            d.split(', ')
-            for i in d:
-              possible_departments.append(d)
-      elif code[0] == "B":
-        for node in G_B.nodes:
+
+    for idx, code in mergeCode:
+      if code[0] == "A":
+        for node in G_A.nodes:
           if code in node:
-            data = list(dict(G_B[node]).keys())
+            data = list(dict(G_A[node]).keys())
             for d in data:
               d.split(', ')
               for i in d:
                 possible_departments.append(d)
+        elif code[0] == "B":
+          for node in G_B.nodes:
+            if code in node:
+              data = list(dict(G_B[node]).keys())
+              for d in data:
+                d.split(', ')
+                for i in d:
+                  possible_departments.append(d)
 
     departments = []
 
@@ -152,7 +154,9 @@ def main():
       keyword2 += '|'
     step2 = step3_list[step3_list['3단계'].str.contains(keyword2[:-1])]
     mergeCode = "B" + step2["2단계 코드"] + step2["3단계 코드"] + step2["4단계 코드"]
-    st.write(mergeCode)
+  st.write(mergeCode)
+  st.session_state.mergeCode = mergeCode
+  getDepartment()
 
 if __name__ == "__main__":
   if 'df_A' not in st.session_state or 'df_B' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state:
