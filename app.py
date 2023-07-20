@@ -72,7 +72,9 @@ if age == '15세 이상의 성인':
     keyword += str(i)
     keyword += '|'
   step3_list = df_A[df_A['4단계'].str.contains(keyword[:-1])]
+  st.write(step3_list)
   step3_list = step3_list["3단계"].drop_duplicates()
+  st.write(step3_list)
   step3 = st.selectbox(
     '환자의 응급상황 정보를 선택해주세요.',
     (tuple(step3_list.values.tolist())))
