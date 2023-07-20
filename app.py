@@ -71,6 +71,7 @@ if age == '15세 이상의 성인':
   for i in step4:
     keyword += str(i)
     keyword += '|'
+  st.write(keyword[:-1])
   step3_list = df_A[df_A['4단계'].str.contains(keyword[:-1]),]
   st.write(step3_list)
   step3_list = step3_list["3단계"].drop_duplicates()
