@@ -116,4 +116,3 @@ if 'r' not in st.session_state or address != st.session_state.old_address:
 r = st.session_state.r
 
 st_folium(r, returned_objects=[])
-
