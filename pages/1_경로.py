@@ -30,7 +30,6 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
   df_distance = pd.DataFrame()
   distance_list = []
   for i, row in df.iterrows():
-    st.write(row)
     if row is not None:
       #i = list(i)
       y = abs(center[0] - float(row['위도'])) * 111
@@ -71,10 +70,11 @@ df_hospital = st.session_state.df_hospital
 if 'center' not in st.session_state or address != st.session_state.old_address:
   st.session_state.center = list(addr_to_lat_lon(address))
 center = st.session_state.center
-if 'df_hospital_distance' not in st.session_state:
+if 'df_hospital_distance' not in st.session_state or address != st.session_state.old_address:
   df_hospital_distance = calculate_distance(df_hospital)
   st.session_state.df_hospital_distance = df_hospital_distance
 df_hospital_distance = st.session_state.df_hospital_distance
+st.write(df_hospital_distance)
 
 if 'G' not in st.session_state:
   G = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
