@@ -75,9 +75,10 @@ if age == '15세 이상의 성인':
   st.write(step3_list)
   step3_list = step3_list["3단계"].drop_duplicates()
   st.write(step3_list)
-  step3 = st.selectbox(
+  step3 = st.multiselect(
     '환자의 응급상황 정보를 선택해주세요.',
     (tuple(step3_list.values.tolist())))
+  
 
 
 code = step3
