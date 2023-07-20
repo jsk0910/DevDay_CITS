@@ -102,6 +102,25 @@ def main():
     step2 = step3_list[step3_list['3단계'].str.contains(keyword2[:-1])]
     mergeCode = "A" + step2["2단계 코드"] + step2["3단계 코드"] + step2["4단계 코드"]
     st.write(mergeCode)
+  elif age == '15세 이상의 아동':
+    step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄워쓰기로 구분)')
+    step4 = step4.split(" ")
+    keyword = ""
+    for i in step4:
+      keyword += str(i)
+      keyword += '|'
+    step3_list = df_B[df_B['4단계'].str.contains(keyword[:-1])]
+    step3_list_2 = step3_list["3단계"].drop_duplicates()
+    step3 = st.multiselect(
+      '환자의 응급상황 정보를 선택해주세요.',
+      (tuple(step3_list_2.values.tolist())))
+    keyword2 = ""
+    for i in step3:
+      keyword2 += str(i)
+      keyword2 += '|'
+    step2 = step3_list[step3_list['3단계'].str.contains(keyword2[:-1])]
+    mergeCode = "B" + step2["2단계 코드"] + step2["3단계 코드"] + step2["4단계 코드"]
+    st.write(mergeCode)
 
 if __name__ == "__main__":
   if 'df_A' not in st.session_state or 'df_B' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state:
