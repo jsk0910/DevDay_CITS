@@ -125,7 +125,7 @@ def main():
       '환자의 나이를 골라주세요.',
       ('15세 이상의 성인', '15세 미만의 아동'))
   if age == '15세 이상의 성인':
-    step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄워쓰기로 구분)')
+    step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
     step4 = step4.split(" ")
     keyword = ""
     for i in step4:
