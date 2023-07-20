@@ -46,7 +46,8 @@ def routeHospital(G, orig, destX, destY):
 
   # fig, ax = ox.plot_graph(G, node_size=0, edge_linewidth=0.5)
   dest = ox.distance.nearest_nodes(G, X=destX, Y=destY)
-  orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
+  st.write(type(orig))
+  st.write(type(dest))
   route = ox.shortest_path(G, orig, dest, weight="travel_time")
   r = ox.plot_route_folium(G, route, popup_attribute='length')
   return r
@@ -80,7 +81,6 @@ if 'G' not in st.session_state:
 if 'orig' not in st.session_state or address != st.session_state.old_address:
   G = st.session_state.G
   orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
-  st.write(orig)
   st.session_state.orig = orig
 
 G = st.session_state.G
