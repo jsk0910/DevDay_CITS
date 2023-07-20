@@ -78,6 +78,7 @@ if age == '15세 이상의 성인':
   step3 = st.multiselect(
     '환자의 응급상황 정보를 선택해주세요.',
     (tuple(step3_list.values.tolist())))
+  step3_values = []
   for i in step3:
     step3_values += i
   st.write(step3_values)
