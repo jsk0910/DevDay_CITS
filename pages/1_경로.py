@@ -78,14 +78,15 @@ orig = st.session_state.orig
 style = {'color': '#1A19AC', 'weight':'1'}
 
 if 'r' not in st.session_state:
-  st.session_state.r = routeHospital(G, orig, 129.18199, 35.173516)
-r = st.session_state.r
-for _, row in df_hospital.iterrows():
+  r = routeHospital(G, orig, 129.18199, 35.173516)
+  for _, row in df_hospital.iterrows():
     folium.Marker(location = [row['위도'], row['경도']],
             popup=row['의료기관명'],
             tooltip=row['의료기관명'],
             icon=folium.Icon(color='red',icon='plus')
           ).add_to(r)
+    st.session_state.r = r
+r = st.session_state.r
 
 st_folium(r, returned_objects=[])
 
