@@ -81,6 +81,7 @@ if 'G' not in st.session_state:
   G = ox.speed.add_edge_travel_times(G)
   st.session_state.G = G
 if 'orig' not in st.session_state or address != st.session_state.old_address:
+  G = st.session_state.G
   orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
   st.session_state.orig = orig
 
