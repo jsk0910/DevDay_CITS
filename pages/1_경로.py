@@ -45,9 +45,8 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
 def routeHospital(G, orig, destX, destY):
 
   # fig, ax = ox.plot_graph(G, node_size=0, edge_linewidth=0.5)
-  st.write(center)
   dest = ox.distance.nearest_nodes(G, X=destX, Y=destY)
-  orig = ox.distance.nearest_nodes(G, X=center[0], Y=center[1])
+  orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
   route = ox.shortest_path(G, orig, dest, weight="travel_time")
   r = ox.plot_route_folium(G, route, popup_attribute='length')
   return r
@@ -80,7 +79,7 @@ if 'G' not in st.session_state:
   st.session_state.G = G
 if 'orig' not in st.session_state or address != st.session_state.old_address:
   G = st.session_state.G
-  orig = ox.distance.nearest_nodes(G, X=center[0], Y=center[1])
+  orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
   st.write(orig)
   st.session_state.orig = orig
 
@@ -93,7 +92,7 @@ min = df_hospital_distance[df_hospital_distance['distance'] == df_hospital_dista
 st.write(min)
 if 'r' not in st.session_state or address != st.session_state.old_address:
   orig = st.session_state.orig
-  r = routeHospital(G, orig, min['위도'], min['경도'])
+  r = routeHospital(G, orig, min['경도'], min['위도'])
   for _, row in df_hospital.iterrows():
     folium.Marker(location = [row['위도'], row['경도']],
             popup=row['의료기관명'],
