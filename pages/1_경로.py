@@ -59,15 +59,27 @@ st.write('경로 시각화 부분')
 address = st.text_input('현재 위치를 입력하세요. (도로명 주소)', '부산광역시 사하구 낙동대로550번길 37')
 df_hospital = st.session_state.df_hospital
 
-center = list(addr_to_lat_lon(address))
-G = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
-orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
-G = ox.speed.add_edge_speeds(G)
-G = ox.speed.add_edge_travel_times(G)
+if 'center' not in st.session_state:
+  st.session_state.center = list(addr_to_lat_lon(address))
+center = st.session_state.center
+
+if 'G' not in st.session_state:
+  G = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
+  G = ox.speed.add_edge_speeds(G)
+  G = ox.speed.add_edge_travel_times(G)
+  st.session_state.G = G
+if 'orig' not in st.session_state:
+  orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
+  st.session_state.orig = orig
+
+G = st.session_state.G
+orig = st.session_state.orig
 
 style = {'color': '#1A19AC', 'weight':'1'}
 
-r = routeHospital(G, orig, 129.18199, 35.173516)
+if 'r' not in st.session_state:
+  st.session_state.r = routeHospital(G, orig, 129.18199, 35.173516)
+r = st.session_state.r
 for _, row in df_hospital.iterrows():
     folium.Marker(location = [row['위도'], row['경도']],
             popup=row['의료기관명'],
