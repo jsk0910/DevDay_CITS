@@ -91,7 +91,15 @@ orig = st.session_state.orig
 
 style = {'color': '#1A19AC', 'weight':'1'}
 min = df_hospital_distance.sort_values(by="distance")
-departments = st.session_state.departments
+
+if 'departments' in st.session_state:
+  departments = st.session_state.departments
+  depart = ""
+  for d in departments:
+    depart += d
+    depart += "&"
+  min = min[min['진료과목'].str.contains(depart[:-1])]
+  st.write(min)
 
 if 'r' not in st.session_state or address != st.session_state.old_address:
   orig = st.session_state.orig
