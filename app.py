@@ -78,12 +78,8 @@ if age == '15세 이상의 성인':
   step3 = st.multiselect(
     '환자의 응급상황 정보를 선택해주세요.',
     (tuple(step3_list.values.tolist())))
-  keyword2 = ""
   for i in step3:
-    keyword2 += str(i)
-    keyword2 += '|'
-  step2 = step3_list[step3_list['3단계'].str.contains(keyword2[:-1])]
-  st.write(step2)
+    st.write(i)
 
 code = step3
 
