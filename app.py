@@ -25,12 +25,19 @@ import json
 import requests
 import math
 
+from src.database import *
+
 # --- import modules end ---
 
 # func: read Data from Repository
 def readData():
   # 이 부분 데이터베이스에서 불러오는 방식으로 바꾸겠습니당
   # mongoDB -> json -> df
+  if 'db' not in st.session_state:
+    db = connectDB(st.secrets.DBPASS)
+    st.session_state.db = db
+  else:
+    db = st.session_state.db
   ## 데이터 불러오기
   df_A = pd.read_csv('data/응급환자_중증도_분류기준.csv', encoding='CP949')
   df_B = pd.read_csv('data/응급환자_중증도_분류기준B.csv')
