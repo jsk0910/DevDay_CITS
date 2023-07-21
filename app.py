@@ -29,6 +29,8 @@ import math
 
 # func: read Data from Repository
 def readData():
+  # 이 부분 데이터베이스에서 불러오는 방식으로 바꾸겠습니당
+  # mongoDB -> json -> df
   ## 데이터 불러오기
   df_A = pd.read_csv('data/응급환자_중증도_분류기준.csv', encoding='CP949')
   df_B = pd.read_csv('data/응급환자_중증도_분류기준B.csv')
@@ -63,6 +65,8 @@ def readData():
 
 # func: make graph with NetworkX
 def makeGraph():
+  # 진료과 + 응급도 등급으로 도출되도록 변경 필요
+  # 그래프에서 관련된 여러과가 나오도록 변경 필요
   ## 진료과 도출
   G_A = nx.Graph() # 15세 이상에 대한 그래프
   G_B = nx.Graph() # 15세 미만에 대한 그래프
