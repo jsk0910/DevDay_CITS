@@ -157,9 +157,11 @@ def main():
   step3_list2 = []
   for key in step3_list:
     step3_list2.append(key)
+
+  df_step3 = pd.DataFrame(step3_list2)
   step3 = st.multiselect(
       '환자의 응급상황 정보를 선택해주세요.',
-      (tuple(step3_list2['description'].split(', ')[2])))
+      (tuple(df_step3['description'].split(', ')[2])))
   '''
   if age == '15세 이상의 성인':
     
