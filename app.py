@@ -33,8 +33,8 @@ def initializeApp():
   st.session_state.sessionState = 1
   st.session_state.df_A = None
   st.session_state.df_B = None
-  st.session_state.df_code = pd.read_csv('data/감염여부_코드.csv')
-  st.session_state.df_hospital = pd.read_csv('data/hospital.csv')
+  st.session_state.df_code = pd.read_csv('/data/감염여부_코드.csv')
+  st.session_state.df_hospital = pd.read_csv('/data/hospital.csv')
 
 # func: read Data from Repository
 def readData():
