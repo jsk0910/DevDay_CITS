@@ -31,10 +31,10 @@ from src.database import *
 
 def initializeApp():
   st.session_state.sessionState = 1
-  st.session_state.df_A = None
-  st.session_state.df_B = None
+  st.session_state.G = None
   st.session_state.df_code = pd.read_csv('/data/감염여부_코드.csv')
   st.session_state.df_hospital = pd.read_csv('/data/hospital.csv')
+  st.session_state.old_address = None
 
 # func: read Data from Repository
 def readData():
@@ -46,10 +46,19 @@ def readData():
   else:
     db = st.session_state.db
 
-  st.write('Connected to Database')
-
   for item in db.code_A.find():
-    st.write(item)
+    if 'G' in st.session_state:
+      G = st.session_state.G
+    else:
+      G = nx.graph()
+    st.session_state.G = makeGraph(item, G)
+  for item in db.code_B.find():
+    if 'G' in st.session_state:
+      G = st.session_state.G
+    else:
+      G = nx.graph()
+    st.session_state.G = makeGraph(item, G)
+    
 
   '''
   ## 데이터 불러오기
@@ -73,7 +82,7 @@ def readData():
   df_B.replace('물질오용', '정신과, 신경과', inplace=True)
   df_B.replace('정신건강', '정신과', inplace=True)
   df_B.replace('코질환', '이비인후과', inplace=True)
-  df_B.replace('ㅂ귀질환', '이비인후과', inplace=True)
+  df_B.replace('귀질환', '이비인후과', inplace=True)
   df_B.replace('호흡기', '호흡기과, 흉부내과', inplace=True)
   df_B.replace('심혈관', '심장내과', inplace=True)
   df_B.replace('소화기', '소화기내과', inplace=True)
@@ -86,20 +95,10 @@ def readData():
   '''
 
 # func: make graph with NetworkX
-def makeGraph():
+def makeGraph(item, G):
   # 진료과 + 응급도 등급으로 도출되도록 변경 필요
-  # 그래프에서 관련된 여러과가 나오도록 변경 필요
-  ## 진료과 도출
-  G_A = nx.Graph() # 15세 이상에 대한 그래프
-  G_B = nx.Graph() # 15세 미만에 대한 그래프
-  
-  for idx, row in df_A.iterrows():
-    G_A.add_edge("A" + row['2단계 코드'] + row['3단계 코드'] + row['4단계 코드'], row['2단계'])
-  for idx, row in df_B.iterrows():
-    G_B.add_edge("B" + row['2단계 코드'] + row['3단계 코드'] + row['4단계 코드'], row['2단계'])
-  
-  st.session_state.G_A = G_A
-  st.session_state.G_B = G_B
+  # 그래프에서 관련된 여러 과가 나오도록 변경 필요
+  G.add_edge(item['firstCode'] + item['secondCode'] + item['thirdCode'] + item['fourthCode'], item['description'].split(', ')[2] + ' ' + item['level'])
 
 def getDepartment():
   mergeCode = st.session_state.mergeCode
@@ -191,11 +190,9 @@ def main():
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
-  if 'sessionState' not in st.session_state:
-    initializeApp()
-  if 'old_address' not in st.session_state:
-    st.session_state.old_address = None
-  if 'df_A' not in st.session_state or 'df_B' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state:
+  if 'sessionState' not in st.session_state: # 세션 코드가 없는 경우
+    initializeApp() # 앱 초기화
+  if 'G' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state: # 그래프, 감염여부 코드, 병원 정보 중 하나라도 없는 경우
     readData()
   df_A = st.session_state.df_A
   df_B = st.session_state.df_B
