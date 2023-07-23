@@ -44,9 +44,11 @@ def readDB():
   else:
     db = st.session_state.db
 
+  return db
+
 # func: read Data from Repository
 def readData():
-  readDB()
+  db = readDB()
     
   G = nx.Graph()
   for item in db.code_A.find():
@@ -129,7 +131,7 @@ def getDepartment():
     
 def main():
   # Streamlit App Setting
-  readDB()
+  db = readDB()
   
   st.title('C-ITS')
   st.subheader('Made By SobanGchA (소 방 차)')
