@@ -148,7 +148,7 @@ def main():
   step4 = step4.split(" ")
   keyword = ""
   for i in step4:
-    keyword = "&".join(step4)
+    keyword = "|".join(step4)
 
   step3_list = None
   if ageCode == 'A':
@@ -158,7 +158,7 @@ def main():
   for key in step3_list:
     step3_list2.append(key['description'].split(', ')[2])
 
-  key = tuple(step3_list2)
+  key = tuple(set(step3_list2))
   step3 = st.multiselect(
       '환자의 응급상황 정보를 선택해주세요.',
       (key))
