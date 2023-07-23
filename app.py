@@ -180,10 +180,10 @@ if __name__ == "__main__":
     initializeApp() # 앱 초기화
   if 'G' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state: # 그래프, 감염여부 코드, 병원 정보 중 하나라도 없는 경우
     readData()
-  df_A = st.session_state.df_A
-  df_B = st.session_state.df_B
+  #df_A = st.session_state.df_A
+  #df_B = st.session_state.df_B
   df_code = st.session_state.df_code
   df_hospital = st.session_state.df_hospital
-  if 'G_A' not in st.session_state or 'G_B' not in st.session_state:
-    makeGraph()
+  #if 'G' not in st.session_state:
+    #makeGraph()
   main()
