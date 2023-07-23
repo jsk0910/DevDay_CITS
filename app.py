@@ -29,6 +29,13 @@ from src.database import *
 
 # --- import modules end ---
 
+def initializeApp():
+  st.session_state.sessionState = 1
+  st.session_state.df_A = None
+  st.session_state.df_B = None
+  st.session_state.df_code = pd.read_csv('data/감염여부_코드.csv')
+  st.session_state.df_hospital = pd.read_csv('data/hospital.csv')
+
 # func: read Data from Repository
 def readData():
   # 이 부분 데이터베이스에서 불러오는 방식으로 바꾸겠습니당
@@ -38,6 +45,11 @@ def readData():
     st.session_state.db = db
   else:
     db = st.session_state.db
+
+  for item in db.code_A.find():
+    st.write(item)
+
+  '''
   ## 데이터 불러오기
   df_A = pd.read_csv('data/응급환자_중증도_분류기준.csv', encoding='CP949')
   df_B = pd.read_csv('data/응급환자_중증도_분류기준B.csv')
@@ -69,6 +81,7 @@ def readData():
   st.session_state.df_B = df_B
   st.session_state.df_code = df_code
   st.session_state.df_hospital = df_hospital
+  '''
 
 # func: make graph with NetworkX
 def makeGraph():
@@ -176,6 +189,8 @@ def main():
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
+  if 'sessionState' not in st.session_state:
+    initializeApp()
   if 'old_address' not in st.session_state:
     st.session_state.old_address = None
   if 'df_A' not in st.session_state or 'df_B' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state:
