@@ -151,7 +151,9 @@ def main():
     keyword.append({"description": i})
   step3_list = None
   if ageCode == 'A':
-    db.code_A.find({"$or": keyword})
+    step3_list = db.code_A.find({"$or": keyword})
+
+  st.write(step3_list)
   '''
   if age == '15세 이상의 성인':
     
