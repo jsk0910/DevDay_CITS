@@ -117,12 +117,12 @@ def main():
   keyword = ""
   keyword = "|".join(step4)
 
-  step3_list = None
   if ageCode == 'A':
-    step3_list = db.code_A.find({"description": {"$regex": keyword[1:-1], "$options": "i"}})
+    response = db.code_A.find({"description": {"$regex": keyword[1:-1], "$options": "i"}})
+    st.session_state.response = response
 
   step3_list2 = []
-  for key in step3_list:
+  for key in response:
     step3_list2.append(key['description'].split(', ')[2])
 
   # step3
@@ -134,7 +134,8 @@ def main():
   keyword2 = "|".join(step3)
 
   #step2
-  for k in step3_list:
+  response = st.session_state.response
+  for k in response:
     st.write(k)
   #step2 = step3_list
   '''
