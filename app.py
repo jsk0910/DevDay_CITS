@@ -136,9 +136,12 @@ def main():
   keyword2 = "|".join(step3)
 
   #step2
+  step2_list = []
   for k in step3_list:
-    st.write(k)
-  #step2 = step3_list
+    if k['description'].str.contains(keyword2[1:-1]):
+      step2_list.append(k)
+  st.write(step2_list)
+  
   '''
   if age == '15세 이상의 성인':
     
