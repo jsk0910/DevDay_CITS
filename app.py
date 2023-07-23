@@ -45,12 +45,16 @@ def readData():
     st.session_state.db = db
   else:
     db = st.session_state.db
-
-  for item in db.code_A.find():
-    st.session_state.G = makeGraph(item, st.session_state.G)
-  for item in db.code_B.find():
-    st.session_state.G = makeGraph(item, st.session_state.G)
     
+  G = nx.Graph()
+  
+  for item in db.code_A.find():
+    
+    G = makeGraph(item, G)
+  for item in db.code_B.find():
+    G = makeGraph(item, G)
+
+  st.session_state.G = G
 
   '''
   ## 데이터 불러오기
