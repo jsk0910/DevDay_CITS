@@ -146,6 +146,7 @@ def main():
     
   step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
   step4 = step4.split(" ")
+  st.write(step4)
   keyword = []
   for i in step4:
     keyword.append({"description": i})
