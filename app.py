@@ -134,7 +134,7 @@ def main():
   keyword2 = "|".join(step3)
 
   #step2
-  st.write(list(step3_list))
+  st.write([key for key in step3_list])
   #step2 = step3_list
   '''
   if age == '15세 이상의 성인':
