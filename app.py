@@ -136,7 +136,6 @@ def main():
   #step2
   for k in step3_list:
     st.write(k)
-  st.write(step2_list)
   #step2 = step3_list
   '''
   if age == '15세 이상의 성인':
