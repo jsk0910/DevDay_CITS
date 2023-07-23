@@ -146,18 +146,17 @@ def main():
     
   step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
   step4 = step4.split(" ")
-  st.write(step4)
   keyword = ""
   for i in step4:
     keyword = "|".join(step4)
 
-  st.write(keyword)
   step3_list = None
   if ageCode == 'A':
     step3_list = db.code_A.find({"description": {"$regex": keyword[1:-1], "$options": "i"}})
 
-  for item in step3_list:
-    st.write(item)
+  step3 = st.multiselect(
+      '환자의 응급상황 정보를 선택해주세요.',
+      (tuple(step3_list['description'].split(', ')[2])))
   '''
   if age == '15세 이상의 성인':
     
