@@ -124,7 +124,7 @@ def main():
   step3_list2 = []
   step3_list = []
   for key in response:
-    step_list.append(key)
+    step3_list.append(key)
     step3_list2.append(key['description'].split(', ')[2])
 
   # step3
