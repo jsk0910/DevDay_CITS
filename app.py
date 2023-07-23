@@ -148,7 +148,7 @@ def main():
   step4 = step4.split(" ")
   keyword = ""
   for i in step4:
-    keyword = "|".join(step4)
+    keyword = "&".join(step4)
 
   step3_list = None
   if ageCode == 'A':
