@@ -136,12 +136,14 @@ def main():
     ageCode = 'A'
   else:
     ageCode = 'B'
+    
   step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
   step4 = step4.split(" ")
   keyword = ""
   for i in step4:
     keyword += str(i)
     keyword += '|'
+  '''
   if age == '15세 이상의 성인':
     
     step3_list = df_A[df_A['4단계'].str.contains(keyword[:-1])]
@@ -175,6 +177,7 @@ def main():
     mergeCode = "B" + step2["2단계 코드"] + step2["3단계 코드"] + step2["4단계 코드"]
   st.session_state.mergeCode = mergeCode
   getDepartment()
+  '''
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
