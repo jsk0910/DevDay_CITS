@@ -37,13 +37,16 @@ def initializeApp():
   st.session_state.df_hospital = pd.read_csv('data/hospital.csv')
   st.session_state.old_address = None
 
-# func: read Data from Repository
-def readData():
+def readDB():
   if 'db' not in st.session_state:
     db = connectDB(st.secrets.DBPASS)
     st.session_state.db = db
   else:
     db = st.session_state.db
+
+# func: read Data from Repository
+def readData():
+  readDB()
     
   G = nx.Graph()
   for item in db.code_A.find():
@@ -125,7 +128,9 @@ def getDepartment():
     st.session_state.departments = departments
     
 def main():
-  ## Streamlit App Setting
+  # Streamlit App Setting
+  readDB()
+  
   st.title('C-ITS')
   st.subheader('Made By SobanGchA (소 방 차)')
   
