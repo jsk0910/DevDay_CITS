@@ -29,6 +29,7 @@ from src.database import *
 
 # --- import modules end ---
 
+# func: initalize Session State
 def initializeApp():
   st.session_state.sessionState = 1
   st.session_state.G = nx.Graph()
@@ -38,8 +39,6 @@ def initializeApp():
 
 # func: read Data from Repository
 def readData():
-  # 이 부분 데이터베이스에서 불러오는 방식으로 바꾸겠습니당
-  # mongoDB -> json -> df
   if 'db' not in st.session_state:
     db = connectDB(st.secrets.DBPASS)
     st.session_state.db = db
@@ -47,14 +46,12 @@ def readData():
     db = st.session_state.db
     
   G = nx.Graph()
-  
   for item in db.code_A.find():
-    
     G = makeGraph(item, G)
   for item in db.code_B.find():
     G = makeGraph(item, G)
 
-  st.session_state.G = G
+  st.session_state.G = G # 세션 저장
 
   '''
   ## 데이터 불러오기
@@ -136,12 +133,17 @@ def main():
       '환자의 나이를 골라주세요.',
       ('15세 이상의 성인', '15세 미만의 아동'))
   if age == '15세 이상의 성인':
-    step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
-    step4 = step4.split(" ")
-    keyword = ""
-    for i in step4:
-      keyword += str(i)
-      keyword += '|'
+    ageCode = 'A'
+  else:
+    ageCode = 'B'
+  step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
+  step4 = step4.split(" ")
+  keyword = ""
+  for i in step4:
+    keyword += str(i)
+    keyword += '|'
+  if age == '15세 이상의 성인':
+    
     step3_list = df_A[df_A['4단계'].str.contains(keyword[:-1])]
     step3_list_2 = step3_list["3단계"].drop_duplicates()
     step3 = st.multiselect(
