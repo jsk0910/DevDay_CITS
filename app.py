@@ -161,7 +161,7 @@ def main():
   key = tuple(step3_list2)
   step3 = st.multiselect(
       '환자의 응급상황 정보를 선택해주세요.',
-      (key)
+      (key))
   '''
   if age == '15세 이상의 성인':
     
