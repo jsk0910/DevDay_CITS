@@ -139,10 +139,12 @@ def main():
     
   step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
   step4 = step4.split(" ")
-  keyword = ""
+  keyword = []
   for i in step4:
-    keyword += str(i)
-    keyword += '|'
+    keyword.append({"description": i})
+  step3_list = None
+  if ageCode == 'A':
+    db.code_A.find({$or})
   '''
   if age == '15세 이상의 성인':
     
