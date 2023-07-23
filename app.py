@@ -149,7 +149,7 @@ def main():
   st.write(step4)
   keyword = []
   for i in step4:
-    keyword.append({"description": {"$in": i}})
+    keyword.append({"description": i})
 
   st.write(keyword)
   step3_list = None
