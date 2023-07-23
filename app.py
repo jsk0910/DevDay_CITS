@@ -58,40 +58,6 @@ def readData():
 
   st.session_state.G = G # 세션 저장
 
-  '''
-  ## 데이터 불러오기
-  df_A = pd.read_csv('data/응급환자_중증도_분류기준.csv', encoding='CP949')
-  df_B = pd.read_csv('data/응급환자_중증도_분류기준B.csv')
-  df_code = pd.read_csv('data/감염여부_코드.csv')
-  df_hospital = pd.read_csv('data/hospital.csv')
-  
-  ## 데이터 전처리
-  df_A.rename(columns={'2단계　': '2단계','Unnamed: 1': '2단계 코드', '3단계　': '3단계', 'Unnamed: 3': '3단계 코드', 'Unnamed: 5': '4단계 코드'}, inplace=True)
-  df_A.replace('물질오용', '정신과, 신경과', inplace=True)
-  df_A.replace('정신건강', '정신과', inplace=True)
-  df_A.replace('코질환', '이비인후과', inplace=True)
-  df_A.replace('귀질환', '이비인후과', inplace=True)
-  df_A.replace('호흡기', '호흡기과, 흉부내과', inplace=True)
-  df_A.replace('심혈관', '심장내과', inplace=True)
-  df_A.replace('소화기', '소화기내과', inplace=True)
-  df_A.replace('피부', '피부과', inplace=True)
-  
-  df_B.rename(columns={'2단계　': '2단계', 'Unnamed: 1': '2단계 코드', '3단계　': '3단계', 'Unnamed: 3': '3단계 코드', '4단계　': '4단계', 'Unnamed: 5': '4단계 코드'}, inplace=True)
-  df_B.replace('물질오용', '정신과, 신경과', inplace=True)
-  df_B.replace('정신건강', '정신과', inplace=True)
-  df_B.replace('코질환', '이비인후과', inplace=True)
-  df_B.replace('귀질환', '이비인후과', inplace=True)
-  df_B.replace('호흡기', '호흡기과, 흉부내과', inplace=True)
-  df_B.replace('심혈관', '심장내과', inplace=True)
-  df_B.replace('소화기', '소화기내과', inplace=True)
-  df_B.replace('피부', '피부과', inplace=True)
-
-  st.session_state.df_A = df_A
-  st.session_state.df_B = df_B
-  st.session_state.df_code = df_code
-  st.session_state.df_hospital = df_hospital
-  '''
-
 # func: make graph with NetworkX
 def makeGraph(item, G):
   # 진료과 + 응급도 등급으로 도출되도록 변경 필요
@@ -147,8 +113,8 @@ def main():
   step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
   step4 = step4.split(" ")
   keyword = ""
-  for i in step4:
-    keyword = "|".join(step4)
+  keyword = "|".join(step4)
+  st.write(keyword)
 
   step3_list = None
   if ageCode == 'A':
@@ -162,6 +128,10 @@ def main():
   step3 = st.multiselect(
       '환자의 응급상황 정보를 선택해주세요.',
       (key))
+
+  keyword2 = ""
+  keyword2 = "|".join(step3)
+  st.write(keyword2)
   '''
   if age == '15세 이상의 성인':
     
