@@ -122,7 +122,9 @@ def main():
     st.session_state.response = response
 
   step3_list2 = []
+  step3_list = []
   for key in response:
+    step_list.append(key)
     step3_list2.append(key['description'].split(', ')[2])
 
   # step3
@@ -134,8 +136,7 @@ def main():
   keyword2 = "|".join(step3)
 
   #step2
-  response = st.session_state.response
-  for k in response:
+  for k in step3_list:
     st.write(k)
   #step2 = step3_list
   '''
