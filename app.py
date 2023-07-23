@@ -102,28 +102,18 @@ def makeGraph(item, G):
 
 def getDepartment():
   mergeCode = st.session_state.mergeCode
-  if 'G_A' in st.session_state or 'G_B' in st.session_state:
-    G_A = st.session_state.G_A
-    G_B = st.session_state.G_B
+  if 'G' in st.session_state:
+    G = st.session_state.G
     possible_departments = []
 
     for code in mergeCode:
-      if code[0] == "A":
-        for node in G_A.nodes:
-          if code in node:
-            data = list(dict(G_A[node]).keys())
-            for d in data:
-              d.split(', ')
-              for i in d:
-                possible_departments.append(d)
-      elif code[0] == "B":
-        for node in G_B.nodes:
-          if code in node:
-            data = list(dict(G_B[node]).keys())
-            for d in data:
-              d.split(', ')
-              for i in d:
-                possible_departments.append(d)
+      for node in G.nodes:
+        if code in node:
+          data = list(dict(G_A[node]).keys())
+          for d in data:
+            d.split(', ')
+            for i in d:
+              possible_departments.append(d)
 
     departments = []
 
