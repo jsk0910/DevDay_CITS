@@ -150,6 +150,8 @@ def main():
   keyword = []
   for i in step4:
     keyword.append({"description": i})
+
+  st.write(keyword)
   step3_list = None
   if ageCode == 'A':
     step3_list = db.code_A.find({"$or": keyword})
