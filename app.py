@@ -134,7 +134,8 @@ def main():
   keyword2 = "|".join(step3)
 
   #step2
-  step2_list=[key for key in step3_list]
+  for k in step3_list:
+    st.write(k)
   st.write(step2_list)
   #step2 = step3_list
   '''
