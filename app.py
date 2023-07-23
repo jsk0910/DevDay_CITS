@@ -47,9 +47,9 @@ def readData():
     db = st.session_state.db
 
   for item in db.code_A.find():
-    st.session_state.G = makeGraph(item, G)
+    st.session_state.G = makeGraph(item, st.session_state.G)
   for item in db.code_B.find():
-    st.session_state.G = makeGraph(item, G)
+    st.session_state.G = makeGraph(item, st.session_state.G)
     
 
   '''
