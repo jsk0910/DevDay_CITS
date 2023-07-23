@@ -31,7 +31,7 @@ from src.database import *
 
 def initializeApp():
   st.session_state.sessionState = 1
-  st.session_state.G = None
+  st.session_state.G = nx.graph()
   st.session_state.df_code = pd.read_csv('/data/감염여부_코드.csv')
   st.session_state.df_hospital = pd.read_csv('/data/hospital.csv')
   st.session_state.old_address = None
@@ -47,16 +47,8 @@ def readData():
     db = st.session_state.db
 
   for item in db.code_A.find():
-    if 'G' in st.session_state:
-      G = st.session_state.G
-    else:
-      G = nx.graph()
     st.session_state.G = makeGraph(item, G)
   for item in db.code_B.find():
-    if 'G' in st.session_state:
-      G = st.session_state.G
-    else:
-      G = nx.graph()
     st.session_state.G = makeGraph(item, G)
     
 
