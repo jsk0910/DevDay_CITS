@@ -46,6 +46,8 @@ def readData():
   else:
     db = st.session_state.db
 
+  st.write('Connected to Database')
+
   for item in db.code_A.find():
     st.write(item)
 
