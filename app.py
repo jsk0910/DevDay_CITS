@@ -101,7 +101,8 @@ def main():
   
   st.title('C-ITS')
   st.subheader('Made By SobanGchA (소 방 차)')
-  
+
+  # 나이 선택
   age = st.selectbox(
       '환자의 나이를 골라주세요.',
       ('15세 이상의 성인', '15세 미만의 아동'))
@@ -110,11 +111,11 @@ def main():
   else:
     ageCode = 'B'
     
+  # step4
   step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
   step4 = step4.split(" ")
   keyword = ""
   keyword = "|".join(step4)
-  st.write(keyword)
 
   step3_list = None
   if ageCode == 'A':
@@ -124,14 +125,17 @@ def main():
   for key in step3_list:
     step3_list2.append(key['description'].split(', ')[2])
 
+  # step3
   key = tuple(set(step3_list2))
   step3 = st.multiselect(
       '환자의 응급상황 정보를 선택해주세요.',
       (key))
-
   keyword2 = ""
   keyword2 = "|".join(step3)
-  st.write(keyword2)
+
+  #step2
+  st.write(type(step3_list))
+  #step2 = step3_list
   '''
   if age == '15세 이상의 성인':
     
