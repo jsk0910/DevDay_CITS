@@ -154,7 +154,7 @@ def main():
   st.write(keyword)
   step3_list = None
   if ageCode == 'A':
-    step3_list = db.code_A.find({"description": {"$in": step4}})
+    step3_list = db.code_A.find({"$or": keyword})
 
   for item in step3_list:
     st.write(item)
