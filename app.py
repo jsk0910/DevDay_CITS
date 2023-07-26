@@ -58,7 +58,7 @@ def readData():
     G = makeGraph(item, G)
 
   st.session_state.G = G # 세션 저장
-  nx.draw(G)
+  G.show()
 
 # func: make graph with NetworkX
 def makeGraph(item, G):
