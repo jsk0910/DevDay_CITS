@@ -144,7 +144,7 @@ if 'r' not in st.session_state or address != st.session_state.old_address:
     r = routeHospital(G_map, orig, [[min.iloc[0]['경도'], min.iloc[0]['위도']],[min.iloc[1]['경도'], min.iloc[1]['위도']], [min.iloc[2]['경도'], min.iloc[2]['위도']]])
   for _, row in df_hospital.iterrows():
     folium.Marker(location = [row['위도'], row['경도']],
-            popup=folium.Popup(f"{row['의료기관명']}\n전화번호: {row['전화번호']}"),
+            popup=folium.Popup(f"{row['의료기관명']}\n전화번호: {row['전화번호']}", max_width=300),
             tooltip=row['의료기관명'],
             icon=folium.Icon(color='red',icon='plus')
           ).add_to(r)
