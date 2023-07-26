@@ -76,7 +76,7 @@ if 'df_hospital_distance' not in st.session_state or address != st.session_state
   st.session_state.df_hospital_distance = df_hospital_distance
 df_hospital_distance = st.session_state.df_hospital_distance
 
-if 'G' not in st.session_state:
+if 'G_map' not in st.session_state:
   G_map = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
   G_map = ox.speed.add_edge_speeds(G)
   G_map = ox.speed.add_edge_travel_times(G)
