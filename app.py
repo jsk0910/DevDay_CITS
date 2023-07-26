@@ -174,7 +174,7 @@ def main():
       for k in step2_list:
         st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
         possible_departments = getDepartment(possible_departments)
-      st.session_state.possible_departments = possible_departments
+      st.session_state.possible_departments = set(possible_departments)
       st.write(st.session_state.possible_departments)
   
   '''
