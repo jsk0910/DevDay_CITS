@@ -165,9 +165,11 @@ def main():
   # 진료과 도출
   if 'possible_departments' not in st.session_state:
     st.session_state.possible_departments = []
+  possible_departments = []
   for k in step2_list:
     st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
-    st.session_state.possible_departments = getDepartment(st.session_state.possible_departments)
+    possible_departments = getDepartment(possible_departments)
+  st.session_state.possible_departments = possible_departments
   st.write(st.session_state.possible_departments)
   
   '''
