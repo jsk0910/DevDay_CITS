@@ -188,7 +188,7 @@ def main():
               </thead>
               <tbody>
         """
-        st.write(html1, unsafe_allow_html=True)
+        #st.write(html1, unsafe_allow_html=True)
 
         html2 = ""
         for i in st.session_state.possible_departments:
@@ -200,7 +200,7 @@ def main():
                     <td>{i.split('|')[1]}</td>
                   </tr>
                   """
-        st.write(html2, unsafe_allow_html=True)
+        st.write(html1+html2, unsafe_allow_html=True)
           
         html3 = """
                 </tbody>
