@@ -74,9 +74,7 @@ def getDepartment(possible_departments:list):
     for node in G.nodes:
       if mergeCode in node:
         data = list(dict(G[node]).keys())
-        for d in data:
-          d.split(', ')
-          st.write(d)
+        st.write(data)
     
 def main():
   # Streamlit App Setting
