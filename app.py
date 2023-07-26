@@ -189,7 +189,8 @@ def main():
               <tbody>
         """
         st.write(html1, unsafe_allow_html=True)
-        
+
+        html2 = ""
         for i in st.session_state.possible_departments:
           emerCode = int(i.split('|')[1])
           html2 += """
