@@ -74,7 +74,7 @@ def getDepartment(possible_departments:list):
     for node in G.nodes:
       if mergeCode in node:
         data = list(dict(G[node]).keys())
-        st.write(data)
+        return data[0]
     
 def main():
   # Streamlit App Setting
@@ -167,9 +167,9 @@ def main():
       possible_departments = []
       for k in step2_list:
         st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
-        getDepartment(possible_departments)
-      #st.session_state.possible_departments = set(possible_departments)
-      #st.write(st.session_state.possible_departments)
+        possible_departments.append(getDepartment(possible_departments))
+      st.session_state.possible_departments = set(possible_departments)
+      st.write(st.session_state.possible_departments)
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
