@@ -190,13 +190,15 @@ def main():
   st.markdown(html1, unsafe_allow_html=True)
   for i in st.session_state.possible_departments:
     st.write(i)
+    emerCode = int(i.split()[1])
     html2 = f"""
           <tbody>
-            <tr class="{}"></tr>
+            <tr class="{'table-warning' if emerCode > 3 else 'table-danger'}">
+              <th class="row">i.split()[0]</th>
+              <td>i.split()[2]</td>
+              <td>i.split()[1]</td>
+            </tr>
           </tbody>
-        </table>
-        <p>증상: {str(i).split()[0]} 응급도: {str(i).split()[1]}</p>
-      </div>
     """
     st.markdown(html2, unsafe_allow_html=True)
 
