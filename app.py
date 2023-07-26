@@ -133,7 +133,7 @@ def main():
   # step4
   step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
 
-  if step4 == "" or step4 == None:
+  if step4 != "" or step4 is not None:
     step4 = step4.split(" ")
     keyword = ""
     keyword = "|".join(step4)
@@ -160,7 +160,7 @@ def main():
     keyword2 = ""
     keyword2 = "|".join(step3)
 
-    if step3 == "" or step3 == None:
+    if step3 != "" or step3 is not None:
       #step2
       step2_list = []
       for k in step3_list:
