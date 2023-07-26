@@ -127,7 +127,7 @@ def main():
   # step4
   step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
 
-  if step4 != "" or step4 is not None:
+  if step4 != "":
     step4 = step4.split(" ")
     keyword = ""
     keyword = "|".join(step4)
@@ -154,7 +154,7 @@ def main():
     keyword2 = ""
     keyword2 = "|".join(step3)
 
-    if step3 != "" or step3 is not None:
+    if step3 != "":
       with st.spinner('증상 도출 중...'):
         #step2
         step2_list = []
