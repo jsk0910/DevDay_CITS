@@ -177,6 +177,7 @@ def main():
   #step2
   step2_list = []
   for k in step3_list:
+    st.write(k['description'])
     if k['description'].contains(keyword2):
       step2_list.append(k)
   st.write(step2_list)
