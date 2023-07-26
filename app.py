@@ -201,7 +201,7 @@ def main():
   html1 += """
           </tbody>
         </table>
-    </div>
+      </div>
   """
   st.markdown(html1, unsafe_allow_html=True)
 
