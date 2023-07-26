@@ -177,8 +177,7 @@ def main():
   #step2
   step2_list = []
   for k in step3_list:
-    st.write(k['description'])
-    if k['description'].contains(keyword2):
+    if re.findall(keyword2, k['description']) != []:
       step2_list.append(k)
   st.write(step2_list)
   
