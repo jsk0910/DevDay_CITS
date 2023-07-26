@@ -49,8 +49,12 @@ def readDB():
 # func: read Data from Repository
 def readData():
   db = readDB()
+
+  if 'G' in st.session_state:
+    G = st.session_state.G
+  else:
+    G = nx.Graph()
     
-  G = st.session_state.G
   for item in db.code_A.find():
     G = makeGraph(item, G)
   for item in db.code_B.find():
