@@ -163,7 +163,7 @@ def main():
     if re.findall(keyword2, k['description']) != []:
       step2_list.append(k)
 
-  st.write(G.edges())
+  st.write(st.session_state.G.edges())
 
   # 진료과 도출
   if 'possible_departments' not in st.session_state:
