@@ -192,14 +192,14 @@ def main():
         
         for i in st.session_state.possible_departments:
           emerCode = int(i.split('|')[1])
-          html2 = """
+          html2 += """
                   <tr class='""" + f"{'table-waring' if emerCode > 3 else 'table-danger'}'>" + f"""
                     <th class="row">{i.split('|')[0]}</th>
                     <td>{i.split('|')[2]}</td>
                     <td>{i.split('|')[1]}</td>
                   </tr>
                   """
-          st.write(html2, unsafe_allow_html=True)
+        st.write(html2, unsafe_allow_html=True)
           
         html3 = """
                 </tbody>
