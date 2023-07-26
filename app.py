@@ -65,11 +65,10 @@ def makeGraph(item, G):
   # 그래프에서 관련된 여러 과가 나오도록 변경 필요
   G.add_edge(item['firstCode'] + item['secondCode'] + item['thirdCode'] + item['fourthCode'], item['description'].split(', ')[2] + ' ' + str(item['level']))
 
-def getDepartment():
+def getDepartment(possible_departments:list):
   mergeCode = st.session_state.mergeCode
   if 'G' in st.session_state:
     G = st.session_state.G
-    possible_departments = []
 
     for code in mergeCode:
       for node in G.nodes:
@@ -179,7 +178,13 @@ def main():
   for k in step3_list:
     if re.findall(keyword2, k['description']) != []:
       step2_list.append(k)
-  st.write(step2_list)
+
+  # 진료과 도출
+  possible_departments = []
+  for k in step2_list:
+    st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
+    getDepartment(possible_departments)
+  st.write(possible_departments)
   
   '''
   if age == '15세 이상의 성인':
