@@ -205,7 +205,7 @@ def main():
               </table>
             </div>
           """
-        st.markdown(html1+html2, unsafe_allow_html=True)
+        st.write(html1+html2, unsafe_allow_html=True)
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
