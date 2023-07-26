@@ -183,7 +183,7 @@ def main():
         html2 = "<table class='table'><thead><tr><th scope='col'>증상 종류</th><th scope='col'>상세 증상</th><th scope='col'>응급도 코드</th></tr></thead><tbody>"
         for i in st.session_state.possible_departments:
           emerCode = int(i.split('|')[1])
-          html2 += "<tr class='" + f"{'table-waring' if emerCode > 3 else 'table-danger'}'>" + f"<th class='row'>{i.split('|')[0]}</th><td>{i.split('|')[2]}</td><td>{i.split('|')</tr>"
+          html2 += "<tr class='" + f"{'table-waring' if emerCode > 3 else 'table-danger'}"+"'>" + f"<th class='row'>{i.split('|')[0]}</th><td>{i.split('|')[2]}</td><td>{i.split('|')</tr>"
           
         html2 += "</tbody></table>"
         st.write(html2, unsafe_allow_html=True)
