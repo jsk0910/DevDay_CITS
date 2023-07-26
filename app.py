@@ -79,7 +79,6 @@ def getDepartment(possible_departments:list):
       for node in G.nodes:
         if code in node:
           data = list(dict(G_A[node]).keys())
-          st.write(data)
           for d in data:
             d.split(', ')
             for i in d:
