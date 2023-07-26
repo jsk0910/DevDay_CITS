@@ -191,16 +191,16 @@ def main():
         html2 = ""
         for i in st.session_state.possible_departments:
           emerCode = int(i.split('|')[1])
-          html2 += """
+          html2 = html2 + """
                   <tr class='"""
-          html2 += f"{'table-waring' if emerCode > 3 else 'table-danger'}'>" 
-          html2 += f"""
+          html2 = html2 + f"{'table-waring' if emerCode > 3 else 'table-danger'}'>" 
+          html2 = html2 + f"""
                     <th class="row">{i.split('|')[0]}</th>
                     <td>{i.split('|')[2]}</td>
                     <td>{i.split('|')[1]}</td>
                   </tr>
                   """
-        html2 += """
+        html2 = html2 + """
                 </tbody>
               </table>
             </div>
