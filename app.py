@@ -198,13 +198,12 @@ def main():
                     <td>{i.split('|')[1]}</td>
                   </tr>
                   """
-        st.write(html2, unsafe_allow_html=True)
           
-        html3 = """
+        html2 += """
                 </tbody>
               </table>
           """
-        st.write(html3, unsafe_allow_html=True)
+        st.write(html2, unsafe_allow_html=True)
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
