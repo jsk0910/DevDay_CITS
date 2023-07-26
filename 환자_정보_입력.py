@@ -26,6 +26,7 @@ import json
 import requests
 import math
 import re
+import os
 
 from bardapi import Bard
 
@@ -83,8 +84,9 @@ def getDepartment(possible_departments:list):
         return data[0]
 
 def connectBard():
-  bard = Bard(token=st.secrets.BARD_KEY)
-  return bard
+  #bard = Bard(token=st.secrets.BARD_KEY)
+  os.environ['_BARD_API_KEY']=st.secrets.BARD_KEY
+  #return bard
 
 # func: main UI
 def main():
@@ -216,7 +218,7 @@ def main():
             if i.split('|')[0] not in firstCodeOfDepart:
               firstCodeOfDepart.append(i.split('|')[0])
               query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 하니? 진료과만 알려줘"
-              response = bard.get_answer(query)['content']
+              response = Bard().get_answer(query)['content']
               gpt_answer.append(response)
       st.write(gpt_answer)
       #for i in gpt_answer:
@@ -226,8 +228,8 @@ if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
   if 'sessionState' not in st.session_state: # 세션 코드가 없는 경우
     initializeApp() # 앱 초기화
-    bard = connectBard()
-    st.session_state.bard = bard
+    connectBard()
+    #st.session_state.bard = bard
     
   # Set Data
   if 'G' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state: # 그래프, 감염여부 코드, 병원 정보 중 하나라도 없는 경우
