@@ -44,13 +44,13 @@ def readDB():
     st.session_state.db = db
   else:
     db = st.session_state.db
-  st.write(db)
+    
   return db
 
 # func: read Data from Repository
 def readData():
   db = readDB()
-  st.write(db)
+  st.write(st.session_state.db)
     
   G = st.session_state.G
   for item in db.code_A.find():
