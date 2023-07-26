@@ -186,7 +186,7 @@ def main():
                   <th scope="col">응급도 코드</th>
                 </tr>
               </thead>
-            <tbody>
+              <tbody>
         """
         for i in st.session_state.possible_departments:
           emerCode = int(i.split('|')[1])
@@ -203,7 +203,7 @@ def main():
                 </tbody>
               </table>
             </div>
-        """
+          """
         st.markdown(html1, unsafe_allow_html=True)
 
 if __name__ == "__main__":
