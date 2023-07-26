@@ -83,7 +83,7 @@ def getDepartment(possible_departments:list):
         return data[0]
 
 def connectOpenAI():
-  openai.api_key = st.secrets.GPT_KEY
+  openai.api_key = st.secrets.BARD_KEY
 
 # func: main UI
 def main():
