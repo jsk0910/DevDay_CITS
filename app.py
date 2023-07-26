@@ -186,21 +186,25 @@ def main():
               <th scope="col">응급도 코드</th>
             </tr>
           </thead>
+          <tbody>
   """
   st.markdown(html1, unsafe_allow_html=True)
   for i in st.session_state.possible_departments:
-    st.write(i)
     emerCode = int(i.split('|')[1])
     html2 = f"""
-          <tbody>
             <tr class="{'table-warning' if emerCode > 3 else 'table-danger'}">
               <th class="row">i.split('|')[0]</th>
               <td>i.split('|')[2]</td>
               <td>i.split('|')[1]</td>
             </tr>
-          </tbody>
     """
     st.markdown(html2, unsafe_allow_html=True)
+  html3 = """
+          </tbody>
+        </table>
+    </div>
+  """
+  st.markdown(html2, unsafe_allow_html=True)
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
