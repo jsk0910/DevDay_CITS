@@ -64,7 +64,7 @@ def readData():
 
 # func: make graph with NetworkX
 def makeGraph(item, G):
-  G.add_edge(item['firstCode'] + item['secondCode'] + item['thirdCode'] + item['fourthCode'], item['description'].split(', ')[2] + ' ' + str(item['level']))
+  G.add_edge(item['firstCode'] + item['secondCode'] + item['thirdCode'] + item['fourthCode'], item['description'].split(', ')[2] + ' ' + str(item['level']) + ' ' + item['description'])
   return G
 
 def getDepartment(possible_departments:list):
