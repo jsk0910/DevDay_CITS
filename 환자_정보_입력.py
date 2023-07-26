@@ -216,7 +216,7 @@ def main():
             if i.split('|')[0] not in firstCodeOfDepart:
               firstCodeOfDepart.append(i.split('|')[0])
               query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 하니? 진료과만 알려줘"
-              response = bard.get_answer(query)
+              response = bard.get_answer(query)['content']
               gpt_answer.append(response)
       st.write(gpt_answer)
       #for i in gpt_answer:
