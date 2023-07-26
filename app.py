@@ -177,8 +177,10 @@ def main():
             <p>각 증상과 응급도 입니다.</p>
             <p><small>*응급도는 1~5이며 1이 가장 응급 상황입니다.</small></p>
           </div>
-          <div class="container">
-            <table class="table">
+        """
+        st.write(html1, unsafe_allow_html=True)
+
+        html2 = """<table class="table">
               <thead>
                 <tr>
                   <th scope="col">증상 종류</th>
@@ -186,11 +188,7 @@ def main():
                   <th scope="col">응급도 코드</th>
                 </tr>
               </thead>
-              <tbody>
-        """
-        #st.write(html1, unsafe_allow_html=True)
-
-        html2 = ""
+              <tbody>"""
         for i in st.session_state.possible_departments:
           emerCode = int(i.split('|')[1])
           html2 += """
@@ -200,12 +198,11 @@ def main():
                     <td>{i.split('|')[1]}</td>
                   </tr>
                   """
-        st.write(html1+html2, unsafe_allow_html=True)
+        st.write(html2, unsafe_allow_html=True)
           
         html3 = """
                 </tbody>
               </table>
-            </div>
           """
         st.write(html3, unsafe_allow_html=True)
 
