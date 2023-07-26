@@ -170,6 +170,7 @@ def main():
           st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
           possible_departments.append(getDepartment(possible_departments))
         st.session_state.possible_departments = set(possible_departments)
+        st.write(st.session_state.possible_departments)
 
   # 진료과 출력
   html1 = """
@@ -190,7 +191,6 @@ def main():
   """
   st.markdown(html1, unsafe_allow_html=True)
   for i in st.session_state.possible_departments:
-    st.write(i)
     emerCode = int(i.split('|')[1])
     html2 = f"""
             <tr class="{'table-warning' if emerCode > 3 else 'table-danger'}">
