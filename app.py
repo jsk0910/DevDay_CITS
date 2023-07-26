@@ -1,6 +1,7 @@
 # --- import modules start ---
 # import streamlit 
 import streamlit as st
+
 # import data analysis modules
 import pandas as pd
 import matplotlib.cm as cm
@@ -26,6 +27,8 @@ import requests
 import math
 import re
 
+import openai
+
 from src.database import *
 
 # --- import modules end ---
@@ -37,6 +40,7 @@ def initializeApp():
   st.session_state.df_hospital = pd.read_csv('data/hospital.csv')
   st.session_state.old_address = None
 
+# func: read MongoDB
 def readDB():
   if 'db' not in st.session_state:
     db = connectDB(st.secrets.DBPASS)
@@ -67,6 +71,7 @@ def makeGraph(item, G):
   G.add_edge(item['firstCode'] + item['secondCode'] + item['thirdCode'] + item['fourthCode'], item['description'].split(', ')[2] + '|' + str(item['level']) + '|' + item['description'].split(', ')[3])
   return G
 
+# func: get Department from Graph
 def getDepartment(possible_departments:list):
   mergeCode = st.session_state.mergeCode
   if 'G' in st.session_state:
@@ -75,7 +80,11 @@ def getDepartment(possible_departments:list):
       if mergeCode in node:
         data = list(dict(G[node]).keys())
         return data[0]
-    
+
+def connectOpenAI():
+  openai.api_key = st.secrets.GPT_KEY
+
+# func: main UI
 def main():
   # Streamlit App Setting
   db = readDB()
@@ -180,22 +189,45 @@ def main():
       """
       st.write(html1, unsafe_allow_html=True)
 
+      kindOfdepart = []
       html2 = "<table class='table'><thead><tr><th scope='col'>증상 종류</th><th scope='col'>상세 증상</th><th scope='col'>응급도 코드</th></tr></thead><tbody>"
       for i in st.session_state.possible_departments:
+        kindOfdepart.append(i.split('|')[0] + '|' + i.split('|')[2])
         emerCode = int(i.split('|')[1])
         html2 += "<tr class='" + f"{'table-warning' if emerCode > 2 else 'table-danger'}"+"'>" + f"<th scope='row'>{i.split('|')[0]}</th><td>{i.split('|')[2]}</td><td>{i.split('|')[1]}</tr>"
         
       html2 += "</tbody></table>"
       st.write(html2, unsafe_allow_html=True)
-
+      kindOfdepart = set(kindOfdepart)
+      firstCodeOfDepart = []
+      
       # GPT 진료과 도출
+      answer = []
       with st.spinner('진료과 도출 중...'):
-        pass
+        connectOpenAI()
+        model = "gpt-3.5-turbo"
+        
+        for i in kindOfdepart:
+          if i.split('|')[0] not in firstCodeOfDepart:
+            firstCodeOfDepart.append(i.split('|')[0])
+            query = i.replace('|', ', ')
+            messages = [
+              {"role": "system", "content": "You are a helpful assistant."},
+              {"role": "user", "content": query}
+            ]
+        
+            response = openai.ChatCompletion.create(
+              model=model,
+              messages=messages
+            )
+            answer.append(response['choices'][0]['message']['content'])
+      st.write(answer)
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
   if 'sessionState' not in st.session_state: # 세션 코드가 없는 경우
     initializeApp() # 앱 초기화
+    
   # Set Data
   if 'G' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state: # 그래프, 감염여부 코드, 병원 정보 중 하나라도 없는 경우
     readData()
