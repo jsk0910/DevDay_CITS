@@ -80,6 +80,7 @@ def getDepartment():
             for i in d:
               possible_departments.append(d)
 
+    '''
     departments = []
 
     for p in possible_departments:
@@ -95,6 +96,7 @@ def getDepartment():
     label = label[:-2] + "입니다."
     st.write(label)
     st.session_state.departments = departments
+    '''
     
 def main():
   # Streamlit App Setting
@@ -219,12 +221,10 @@ if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
   if 'sessionState' not in st.session_state: # 세션 코드가 없는 경우
     initializeApp() # 앱 초기화
+  # Set Data
   if 'G' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state: # 그래프, 감염여부 코드, 병원 정보 중 하나라도 없는 경우
     readData()
-  #df_A = st.session_state.df_A
-  #df_B = st.session_state.df_B
   df_code = st.session_state.df_code
   df_hospital = st.session_state.df_hospital
-  #if 'G' not in st.session_state:
-    #makeGraph()
+  
   main()
