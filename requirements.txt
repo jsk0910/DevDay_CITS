@@ -7,5 +7,6 @@ geopandas
 networkx
 folium
 streamlit-folium
+streamlit_extras
 scikit-learn
 openai
