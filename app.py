@@ -44,7 +44,7 @@ def readDB():
     st.session_state.db = db
   else:
     db = st.session_state.db
-
+  st.write(db)
   return db
 
 # func: read Data from Repository
