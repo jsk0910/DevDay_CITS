@@ -151,11 +151,10 @@ def main():
     step3 = st.multiselect(
         '환자의 응급상황 정보를 선택해주세요.',
         (key))
-    st.write(step3)
     keyword2 = ""
     keyword2 = "|".join(step3)
 
-    if step3 != "":
+    if step3 != []:
       with st.spinner('증상 도출 중...'):
         #step2
         step2_list = []
