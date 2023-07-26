@@ -85,7 +85,7 @@ def getDepartment(possible_departments:list):
 
 def connectBard():
   #bard = Bard(token=st.secrets.BARD_KEY)
-  os.environ['_BARD_API_KEY']=st.secrets.BARD_KEY
+  os.environ['_BARD_API_KEY']="YQhACbFGoLJidBL3QisUB_ojuuGFR22ckaVLfz5Zr_-9fqp08ShohcOc8BF_MlqFr2uVTw."
   #return bard
 
 # func: main UI
