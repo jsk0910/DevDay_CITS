@@ -182,8 +182,7 @@ def main():
   for i in st.session_state.possible_departments:
     html2 = f"""
       <div class="container">
-        <p>증상: {str(i).split()[0]}</p>
-        <p>응급도: {str(i).split()[1]}</p>
+        <p>증상: {str(i).split()[0]} 응급도: {str(i).split()[1]}</p>
       </div>
     """
     st.markdown(html2, unsafe_allow_html=True)
