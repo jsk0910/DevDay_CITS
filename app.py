@@ -135,47 +135,50 @@ def main():
     
   # step4
   step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
-  step4 = step4.split(" ")
-  keyword = ""
-  keyword = "|".join(step4)
 
-  if ageCode == 'A':
-    response = db.code_A.find({"description": {"$regex": keyword[1:-1], "$options": "i"}})
-    st.session_state.response = response
+  if step4 == "" or step4 == None:
+    step4 = step4.split(" ")
+    keyword = ""
+    keyword = "|".join(step4)
+  
+    if ageCode == 'A':
+      response = db.code_A.find({"description": {"$regex": keyword[1:-1], "$options": "i"}})
+      st.session_state.response = response
+  
+    if ageCode == 'B':
+      response = db.code_B.find({"description": {"$regex": keyword[1:-1], "$options": "i"}})
+      st.session_state.response = response
+  
+    step3_list2 = []
+    step3_list = []
+    for key in response:
+      step3_list.append(key)
+      step3_list2.append(key['description'].split(', ')[2])
+  
+    # step3
+    key = tuple(set(step3_list2))
+    step3 = st.multiselect(
+        '환자의 응급상황 정보를 선택해주세요.',
+        (key))
+    keyword2 = ""
+    keyword2 = "|".join(step3)
 
-  if ageCode == 'B':
-    response = db.code_B.find({"description": {"$regex": keyword[1:-1], "$options": "i"}})
-    st.session_state.response = response
-
-  step3_list2 = []
-  step3_list = []
-  for key in response:
-    step3_list.append(key)
-    step3_list2.append(key['description'].split(', ')[2])
-
-  # step3
-  key = tuple(set(step3_list2))
-  step3 = st.multiselect(
-      '환자의 응급상황 정보를 선택해주세요.',
-      (key))
-  keyword2 = ""
-  keyword2 = "|".join(step3)
-
-  #step2
-  step2_list = []
-  for k in step3_list:
-    if re.findall(keyword2, k['description']) != []:
-      step2_list.append(k)
-
-  # 진료과 도출
-  if 'possible_departments' not in st.session_state:
-    st.session_state.possible_departments = []
-  possible_departments = []
-  for k in step2_list:
-    st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
-    possible_departments = getDepartment(possible_departments)
-  st.session_state.possible_departments = possible_departments
-  st.write(st.session_state.possible_departments)
+    if step3 == "" or step3 == None:
+      #step2
+      step2_list = []
+      for k in step3_list:
+        if re.findall(keyword2, k['description']) != []:
+          step2_list.append(k)
+    
+      # 진료과 도출
+      if 'possible_departments' not in st.session_state:
+        st.session_state.possible_departments = []
+      possible_departments = []
+      for k in step2_list:
+        st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
+        possible_departments = getDepartment(possible_departments)
+      st.session_state.possible_departments = possible_departments
+      st.write(st.session_state.possible_departments)
   
   '''
   if age == '15세 이상의 성인':
