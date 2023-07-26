@@ -151,6 +151,7 @@ def main():
     step3 = st.multiselect(
         '환자의 응급상황 정보를 선택해주세요.',
         (key))
+    st.write(step3)
     keyword2 = ""
     keyword2 = "|".join(step3)
 
