@@ -188,6 +188,10 @@ def main():
       html2 += "</tbody></table>"
       st.write(html2, unsafe_allow_html=True)
 
+      # GPT 진료과 도출
+      with st.spinner('진료과 도출 중...'):
+        pass
+
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
   if 'sessionState' not in st.session_state: # 세션 코드가 없는 경우
