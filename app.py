@@ -163,11 +163,12 @@ def main():
       step2_list.append(k)
 
   # 진료과 도출
-  possible_departments = []
+  if 'possible_departments' not in st.session_state:
+    st.session_state.possible_departments = []
   for k in step2_list:
     st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
-    possible_departments = getDepartment(possible_departments)
-  st.write(possible_departments)
+    st.session_state.possible_departments = getDepartment(st.session_state.possible_departments)
+  st.write(st.session_state.possible_departments)
   
   '''
   if age == '15세 이상의 성인':
