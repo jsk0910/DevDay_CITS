@@ -134,8 +134,6 @@ def main():
       </style>
   """
   st.markdown(htmlTitle, unsafe_allow_html=True)
-  st.title('C-ITS')
-  st.subheader('Made By SobanGchA (소 방 차)')
 
   # 나이 선택
   age = st.selectbox(
