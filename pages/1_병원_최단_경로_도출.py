@@ -93,49 +93,50 @@ st.markdown(htmlTitle, unsafe_allow_html=True)
 
 ## 병원 위치 시각화
 address = st.text_input('현재 위치를 입력하세요. (도로명 주소)', '부산광역시 사하구 낙동대로550번길 37')
-if 'address' not in st.session_state:
-  st.session_state.address = address
-elif address != st.session_state.address:
-  st.session_state.old_address = st.session_state.address
-  st.session_state.address = address
-df_hospital = st.session_state.df_hospital
-
-if 'center' not in st.session_state or address != st.session_state.old_address:
-  st.session_state.center = list(addr_to_lat_lon(address))
-center = st.session_state.center
-if 'df_hospital_distance' not in st.session_state or address != st.session_state.old_address:
-  df_hospital_distance = calculate_distance(df_hospital)
-  st.session_state.df_hospital_distance = df_hospital_distance
-df_hospital_distance = st.session_state.df_hospital_distance
-
-if 'G_map' not in st.session_state:
-  G_map = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
-  G_map = ox.speed.add_edge_speeds(G_map)
-  G_map = ox.speed.add_edge_travel_times(G_map)
-  st.session_state.G_map = G_map
-if 'orig' not in st.session_state or address != st.session_state.old_address:
+with st.spinner('지도 로딩 중...'):
+  if 'address' not in st.session_state:
+    st.session_state.address = address
+  elif address != st.session_state.address:
+    st.session_state.old_address = st.session_state.address
+    st.session_state.address = address
+  df_hospital = st.session_state.df_hospital
+  
+  if 'center' not in st.session_state or address != st.session_state.old_address:
+    st.session_state.center = list(addr_to_lat_lon(address))
+  center = st.session_state.center
+  if 'df_hospital_distance' not in st.session_state or address != st.session_state.old_address:
+    df_hospital_distance = calculate_distance(df_hospital)
+    st.session_state.df_hospital_distance = df_hospital_distance
+  df_hospital_distance = st.session_state.df_hospital_distance
+  
+  if 'G_map' not in st.session_state:
+    G_map = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
+    G_map = ox.speed.add_edge_speeds(G_map)
+    G_map = ox.speed.add_edge_travel_times(G_map)
+    st.session_state.G_map = G_map
+  if 'orig' not in st.session_state or address != st.session_state.old_address:
+    G_map = st.session_state.G_map
+    orig = ox.distance.nearest_nodes(G_map, X=center[1], Y=center[0])
+    st.session_state.orig = orig
+  
   G_map = st.session_state.G_map
-  orig = ox.distance.nearest_nodes(G_map, X=center[1], Y=center[0])
-  st.session_state.orig = orig
-
-G_map = st.session_state.G_map
-orig = st.session_state.orig
-
-style = {'color': '#1A19AC', 'weight':'1'}
-min = df_hospital_distance.sort_values(by="distance")
-st.session_state.min = min
-
-if 'departments' in st.session_state:
-  departments = st.session_state.departments
-  try:
-    depart = ""
-    for i in departments:
-      depart += i
-      depart += '|'
-    depart += '내과'
-    min = min[min['진료과목'].str.contains(depart)]
-  except:
-    min = st.session_state.min
+  orig = st.session_state.orig
+  
+  style = {'color': '#1A19AC', 'weight':'1'}
+  min = df_hospital_distance.sort_values(by="distance")
+  st.session_state.min = min
+  
+  if 'departments' in st.session_state:
+    departments = st.session_state.departments
+    try:
+      depart = ""
+      for i in departments:
+        depart += i
+        depart += '|'
+      depart += '내과'
+      min = min[min['진료과목'].str.contains(depart)]
+    except:
+      min = st.session_state.min
 
 if 'r' not in st.session_state or address != st.session_state.old_address:
   newline = '\n'
