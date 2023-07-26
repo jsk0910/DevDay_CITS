@@ -71,14 +71,12 @@ def getDepartment(possible_departments:list):
   mergeCode = st.session_state.mergeCode
   if 'G' in st.session_state:
     G = st.session_state.G
-
-    for code in mergeCode:
-      for node in G.nodes:
-        if code in node:
-          data = list(dict(G[node]).keys())
-          for d in data:
-            d.split(', ')
-            st.write(d)
+    for node in G.nodes:
+      if mergeCode in node:
+        data = list(dict(G[node]).keys())
+        for d in data:
+          d.split(', ')
+          st.write(d)
     
 def main():
   # Streamlit App Setting
