@@ -155,23 +155,37 @@ def main():
     keyword2 = "|".join(step3)
 
     if step3 != "" or step3 is not None:
-      #step2
-      step2_list = []
-      for k in step3_list:
-        if re.findall(keyword2, k['description']) != []:
-          step2_list.append(k)
-    
-      # 진료과 도출
-      if 'possible_departments' not in st.session_state:
-        st.session_state.possible_departments = []
-      possible_departments = []
-      for k in step2_list:
-        st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
-        possible_departments.append(getDepartment(possible_departments))
-      st.session_state.possible_departments = set(possible_departments)
+      with st.spinner('증상 도출 중...'):
+        #step2
+        step2_list = []
+        for k in step3_list:
+          if re.findall(keyword2, k['description']) != []:
+            step2_list.append(k)
+      
+        # 진료과 도출
+        if 'possible_departments' not in st.session_state:
+          st.session_state.possible_departments = []
+        possible_departments = []
+        for k in step2_list:
+          st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
+          possible_departments.append(getDepartment(possible_departments))
+        st.session_state.possible_departments = set(possible_departments)
 
   # 진료과 출력
+  html1 = """
+    <div class="container">
+      <p>각 증상과 응급도 입니다.</p>
+      <p><small>*응급도는 1~5이며 1이 가장 응급 상황입니다.</small></p>
+    </div>
+  """
+  st.markdown(html1, unsafe_allow_html=True)
   for i in st.session_state.possible_departments:
+    html2 = f"""
+      <div class="container">
+        <p>증상: {str(i).split()[0]}</p>
+        <p>응급도: {str(i).split()[1]}</p>
+      </div>
+    """
     st.write(str(i).split())
 
 if __name__ == "__main__":
