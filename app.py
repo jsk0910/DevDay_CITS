@@ -154,6 +154,10 @@ def main():
     response = db.code_A.find({"description": {"$regex": keyword[1:-1], "$options": "i"}})
     st.session_state.response = response
 
+  if ageCode == 'B':
+    response = db.code_B.find({"description": {"$regex": keyword[1:-1], "$options": "i"}})
+    st.session_state.response = response
+
   step3_list2 = []
   step3_list = []
   for key in response:
