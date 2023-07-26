@@ -193,7 +193,8 @@ def main():
           html1 += """
                   <tr class='"""
           html1 += f"{'table-waring' if emerCode > 3 else 'table-danger'}'>" 
-          html1 += f"""<th class="row">{i.split('|')[0]}</th>
+          html1 += f"""
+                    <th class="row">{i.split('|')[0]}</th>
                     <td>{i.split('|')[2]}</td>
                     <td>{i.split('|')[1]}</td>
                   </tr>
