@@ -58,10 +58,6 @@ def readData():
     G = makeGraph(item, G)
 
   st.session_state.G = G # 세션 저장
-  fig, ax = plt.subplots()
-  pos = nx.kamada_kawai_layout(G)
-  nx.draw(G,pos, with_labels=True)
-  st.pyplot(fig)
 
 # func: make graph with NetworkX
 def makeGraph(item, G):
@@ -166,6 +162,8 @@ def main():
   for k in step3_list:
     if re.findall(keyword2, k['description']) != []:
       step2_list.append(k)
+
+  st.write(G.edges())
 
   # 진료과 도출
   if 'possible_departments' not in st.session_state:
