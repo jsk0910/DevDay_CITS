@@ -79,8 +79,7 @@ def getDepartment(possible_departments:list):
           for d in data:
             d.split(', ')
             for i in d:
-              possible_departments.append(d)
-    return possible_departments
+              st.write(d)
     
 def main():
   # Streamlit App Setting
@@ -174,44 +173,8 @@ def main():
       for k in step2_list:
         st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
         possible_departments = getDepartment(possible_departments)
-      st.session_state.possible_departments = set(possible_departments)
-      st.write(st.session_state.possible_departments)
-  
-  '''
-  if age == '15세 이상의 성인':
-    
-    step3_list = df_A[df_A['4단계'].str.contains(keyword[:-1])]
-    step3_list_2 = step3_list["3단계"].drop_duplicates()
-    step3 = st.multiselect(
-      '환자의 응급상황 정보를 선택해주세요.',
-      (tuple(step3_list_2.values.tolist())))
-    keyword2 = ""
-    for i in step3:
-      keyword2 += str(i)
-      keyword2 += '|'
-    step2 = step3_list[step3_list['3단계'].str.contains(keyword2[:-1])]
-    mergeCode = "A" + step2["2단계 코드"] + step2["3단계 코드"] + step2["4단계 코드"]
-  elif age == '15세 미만의 아동':
-    step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄워쓰기로 구분)')
-    step4 = step4.split(" ")
-    keyword = ""
-    for i in step4:
-      keyword += str(i)
-      keyword += '|'
-    step3_list = df_B[df_B['4단계'].str.contains(keyword[:-1])]
-    step3_list_2 = step3_list["3단계"].drop_duplicates()
-    step3 = st.multiselect(
-      '환자의 응급상황 정보를 선택해주세요.',
-      (tuple(step3_list_2.values.tolist())))
-    keyword2 = ""
-    for i in step3:
-      keyword2 += str(i)
-      keyword2 += '|'
-    step2 = step3_list[step3_list['3단계'].str.contains(keyword2[:-1])]
-    mergeCode = "B" + step2["2단계 코드"] + step2["3단계 코드"] + step2["4단계 코드"]
-  st.session_state.mergeCode = mergeCode
-  getDepartment()
-  '''
+      #st.session_state.possible_departments = set(possible_departments)
+      #st.write(st.session_state.possible_departments)
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
