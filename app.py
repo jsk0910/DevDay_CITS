@@ -171,22 +171,22 @@ def main():
           possible_departments.append(getDepartment(possible_departments))
         st.session_state.possible_departments = set(possible_departments)
 
-        # 진료과 출력
-        html1 = """
-          <div class="container">
-            <p>각 증상과 응급도 입니다.</p>
-            <p><small>*응급도는 1~5이며 1이 가장 응급 상황입니다.</small></p>
-          </div>
-        """
-        st.write(html1, unsafe_allow_html=True)
+      # 진료과 출력
+      html1 = """
+        <div class="container">
+          <p>각 증상과 응급도 입니다.</p>
+          <p><small>*응급도는 1~5이며 1이 가장 응급 상황입니다.</small></p>
+        </div>
+      """
+      st.write(html1, unsafe_allow_html=True)
 
-        html2 = "<table class='table'><thead><tr><th scope='col'>증상 종류</th><th scope='col'>상세 증상</th><th scope='col'>응급도 코드</th></tr></thead><tbody>"
-        for i in st.session_state.possible_departments:
-          emerCode = int(i.split('|')[1])
-          html2 += "<tr class='" + f"{'table-warning' if emerCode > 2 else 'table-danger'}"+"'>" + f"<th scope='row'>{i.split('|')[0]}</th><td>{i.split('|')[2]}</td><td>{i.split('|')[1]}</tr>"
-          
-        html2 += "</tbody></table>"
-        st.write(html2, unsafe_allow_html=True)
+      html2 = "<table class='table'><thead><tr><th scope='col'>증상 종류</th><th scope='col'>상세 증상</th><th scope='col'>응급도 코드</th></tr></thead><tbody>"
+      for i in st.session_state.possible_departments:
+        emerCode = int(i.split('|')[1])
+        html2 += "<tr class='" + f"{'table-warning' if emerCode > 2 else 'table-danger'}"+"'>" + f"<th scope='row'>{i.split('|')[0]}</th><td>{i.split('|')[2]}</td><td>{i.split('|')[1]}</tr>"
+        
+      html2 += "</tbody></table>"
+      st.write(html2, unsafe_allow_html=True)
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
