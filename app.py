@@ -78,7 +78,7 @@ def getDepartment(possible_departments:list):
     for code in mergeCode:
       for node in G.nodes:
         if code in node:
-          data = list(dict(G_A[node]).keys())
+          data = list(dict(G[node]).keys())
           for d in data:
             d.split(', ')
             for i in d:
@@ -166,8 +166,6 @@ def main():
   for k in step3_list:
     if re.findall(keyword2, k['description']) != []:
       step2_list.append(k)
-
-  st.write(st.session_state.G.edges())
 
   # 진료과 도출
   if 'possible_departments' not in st.session_state:
