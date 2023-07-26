@@ -27,7 +27,7 @@ import requests
 import math
 import re
 
-import openai
+from bardapi import Bard
 
 from src.database import *
 
@@ -82,8 +82,9 @@ def getDepartment(possible_departments:list):
         data = list(dict(G[node]).keys())
         return data[0]
 
-def connectOpenAI():
-  openai.api_key = st.secrets.BARD_KEY
+def connectBard():
+  bard = Bard(token=st.secrets.BARD_KEY)
+  return bard
 
 # func: main UI
 def main():
@@ -210,22 +211,12 @@ def main():
 
       if gpt_answer == []:
         with st.spinner('진료과 도출 중...'):
-          model = "gpt-3.5-turbo"
-          
           for i in kindOfdepart:
             if i.split('|')[0] not in firstCodeOfDepart:
               firstCodeOfDepart.append(i.split('|')[0])
               query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 하니? 진료과만 알려줘"
-              messages = [
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": query}
-              ]
-          
-              response = openai.ChatCompletion.create(
-                model=model,
-                messages=messages
-              )
-              gpt_answer.append(response['choices'][0]['message']['content'])
+              response = bard.get_answer(query)
+              gpt_answer.append(response)
       st.write(gpt_answer)
       #for i in gpt_answer:
         
@@ -234,7 +225,8 @@ if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
   if 'sessionState' not in st.session_state: # 세션 코드가 없는 경우
     initializeApp() # 앱 초기화
-    connectOpenAI()
+    bard = connectBard()
+    st.session_state.bard = bard
     
   # Set Data
   if 'G' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state: # 그래프, 감염여부 코드, 병원 정보 중 하나라도 없는 경우
