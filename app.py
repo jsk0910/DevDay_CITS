@@ -78,24 +78,6 @@ def getDepartment(possible_departments:list):
             d.split(', ')
             for i in d:
               possible_departments.append(d)
-
-    '''
-    departments = []
-
-    for p in possible_departments:
-      data = p.split(', ')
-      for d in data:
-        if d in departments:
-          break
-        departments.append(d)
-    label = "도출된 진료과는 "
-    for i in departments:
-      label += i
-      label += ", "
-    label = label[:-2] + "입니다."
-    st.write(label)
-    st.session_state.departments = departments
-    '''
     
 def main():
   # Streamlit App Setting
