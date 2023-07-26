@@ -64,9 +64,6 @@ def readData():
 
 # func: make graph with NetworkX
 def makeGraph(item, G):
-  # 진료과 + 응급도 등급으로 도출되도록 변경 필요
-  # 그래프에서 관련된 여러 과가 나오도록 변경 필요
-  st.write(item['description'].split(', ')[2] + ' ' + str(item['level']))
   G.add_edge(item['firstCode'] + item['secondCode'] + item['thirdCode'] + item['fourthCode'], item['description'].split(', ')[2] + ' ' + str(item['level']))
   return G
 
