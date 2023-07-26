@@ -190,6 +190,7 @@ def main():
   """
   st.markdown(html1, unsafe_allow_html=True)
   for i in st.session_state.possible_departments:
+    st.write(i)
     emerCode = int(i.split('|')[1])
     html2 = f"""
             <tr class="{'table-warning' if emerCode > 3 else 'table-danger'}">
