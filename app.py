@@ -189,24 +189,26 @@ def main():
               <tbody>
         """
         st.write(html1, unsafe_allow_html=True)
-        html2 = ""
+        
         for i in st.session_state.possible_departments:
           emerCode = int(i.split('|')[1])
-          html2 = html2 + """
+          html2 = """
                   <tr class='"""
-          html2 = html2 + f"{'table-waring' if emerCode > 3 else 'table-danger'}'>" 
-          html2 = html2 + f"""
+          + f"{'table-waring' if emerCode > 3 else 'table-danger'}'>" 
+          + f"""
                     <th class="row">{i.split('|')[0]}</th>
                     <td>{i.split('|')[2]}</td>
                     <td>{i.split('|')[1]}</td>
                   </tr>
                   """
-        html2 = html2 + """
+          st.write(html2, unsafe_allow_html=True)
+          
+        html3 = """
                 </tbody>
               </table>
             </div>
           """
-        st.write(html2, unsafe_allow_html=True)
+        st.write(html3, unsafe_allow_html=True)
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
