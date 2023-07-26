@@ -39,6 +39,7 @@ def initializeApp():
   st.session_state.df_code = pd.read_csv('data/감염여부_코드.csv')
   st.session_state.df_hospital = pd.read_csv('data/hospital.csv')
   st.session_state.old_address = None
+  st.session_state.gpt_answer = []
 
 # func: read MongoDB
 def readDB():
@@ -136,8 +137,10 @@ def main():
   # step4
   step4 = st.text_input('증상의 키워드를 입력하세요.(여러개일 경우, 띄어쓰기로 구분)')
 
-  if step4 != "":
+  if step4 != "" and ('oldStep' not in st.session_state or step4 != st.session_state.oldStep):
+    st.session_state.gpt_answer = []
     step4 = step4.split(" ")
+    st.session_state.oldStep = step4
     keyword = ""
     keyword = "|".join(step4)
   
@@ -202,31 +205,35 @@ def main():
       firstCodeOfDepart = []
       
       # GPT 진료과 도출
-      answer = []
-      with st.spinner('진료과 도출 중...'):
-        connectOpenAI()
-        model = "gpt-3.5-turbo"
+      gpt_answer = st.session_state.gpt_answer
+
+      if gpt_answer == []:
+        with st.spinner('진료과 도출 중...'):
+          model = "gpt-3.5-turbo"
+          
+          for i in kindOfdepart:
+            if i.split('|')[0] not in firstCodeOfDepart:
+              firstCodeOfDepart.append(i.split('|')[0])
+              query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 하니? 진료과만 알려줘"
+              messages = [
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": query}
+              ]
+          
+              response = openai.ChatCompletion.create(
+                model=model,
+                messages=messages
+              )
+              gpt_answer.append(response['choices'][0]['message']['content'])
+      st.write(gpt_answer)
+      #for i in gpt_answer:
         
-        for i in kindOfdepart:
-          if i.split('|')[0] not in firstCodeOfDepart:
-            firstCodeOfDepart.append(i.split('|')[0])
-            query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 하니?"
-            messages = [
-              {"role": "system", "content": "You are a helpful assistant."},
-              {"role": "user", "content": query}
-            ]
-        
-            response = openai.ChatCompletion.create(
-              model=model,
-              messages=messages
-            )
-            answer.append(response['choices'][0]['message']['content'])
-      st.write(answer)
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
   if 'sessionState' not in st.session_state: # 세션 코드가 없는 경우
     initializeApp() # 앱 초기화
+    connectOpenAI()
     
   # Set Data
   if 'G' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state: # 그래프, 감염여부 코드, 병원 정보 중 하나라도 없는 경우
