@@ -33,7 +33,6 @@ from src.database import *
 # func: initalize Session State
 def initializeApp():
   st.session_state.sessionState = 1
-  st.session_state.G = nx.Graph()
   st.session_state.df_code = pd.read_csv('data/감염여부_코드.csv')
   st.session_state.df_hospital = pd.read_csv('data/hospital.csv')
   st.session_state.old_address = None
@@ -50,11 +49,9 @@ def readDB():
 # func: read Data from Repository
 def readData():
   db = readDB()
-  st.write(st.session_state.db)
     
   G = st.session_state.G
   for item in db.code_A.find():
-    st.write(item)
     G = makeGraph(item, G)
   for item in db.code_B.find():
     G = makeGraph(item, G)
