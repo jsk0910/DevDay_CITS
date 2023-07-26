@@ -109,7 +109,8 @@ def main():
     type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
     <div class="container title">
-      <p style="font-weight: 600; font-size: 20px;">C-ITS 응급구조지원시스템</p>
+      <p style="font-weight: 600; font-size: 20px;">C-ITS 응급환자이송지원시스템</p>
+      <p style="font-weight: 600; font-size: 20px;">환자 정보 입력</p>
     </div>
     <style type="text/css">
         @font-face {
