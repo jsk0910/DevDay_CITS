@@ -77,16 +77,16 @@ if 'df_hospital_distance' not in st.session_state or address != st.session_state
 df_hospital_distance = st.session_state.df_hospital_distance
 
 if 'G' not in st.session_state:
-  G = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
-  G = ox.speed.add_edge_speeds(G)
-  G = ox.speed.add_edge_travel_times(G)
-  st.session_state.G = G
+  G_map = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
+  G_map = ox.speed.add_edge_speeds(G)
+  G_map = ox.speed.add_edge_travel_times(G)
+  st.session_state.G_map = G_map
 if 'orig' not in st.session_state or address != st.session_state.old_address:
-  G = st.session_state.G
-  orig = ox.distance.nearest_nodes(G, X=center[1], Y=center[0])
+  G_map = st.session_state.G_map
+  orig = ox.distance.nearest_nodes(G_map, X=center[1], Y=center[0])
   st.session_state.orig = orig
 
-G = st.session_state.G
+G_map = st.session_state.G_map
 orig = st.session_state.orig
 
 style = {'color': '#1A19AC', 'weight':'1'}
@@ -107,7 +107,7 @@ if 'departments' in st.session_state:
 
 if 'r' not in st.session_state or address != st.session_state.old_address:
   orig = st.session_state.orig
-  r = routeHospital(G, orig, [[min.iloc[0]['경도'], min.iloc[0]['위도']],[min.iloc[1]['경도'], min.iloc[1]['위도']], [min.iloc[2]['경도'], min.iloc[2]['위도']]])
+  r = routeHospital(G_map, orig, [[min.iloc[0]['경도'], min.iloc[0]['위도']],[min.iloc[1]['경도'], min.iloc[1]['위도']], [min.iloc[2]['경도'], min.iloc[2]['위도']]])
   for _, row in df_hospital.iterrows():
     folium.Marker(location = [row['위도'], row['경도']],
             popup=row['의료기관명'],
