@@ -186,7 +186,7 @@ def main():
         <p>응급도: {str(i).split()[1]}</p>
       </div>
     """
-    st.write(str(i).split())
+    st.markdown(html2, unsafe_allow_html=True)
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
