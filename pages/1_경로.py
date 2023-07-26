@@ -55,10 +55,41 @@ def routeHospital(G, orig, dest):
   r = ox.plot_route_folium(G, route3, route_map=r, popup_attribute='length', zoom=13, color="blue")
   return r
 
+# title
 htmlTitle = """
-<div><h3>🎈Hello World!</h3></div>
+  <!-- Font Awesome -->
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"/>
+  <!-- MDB -->
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+  rel="stylesheet"/>
+  <!-- MDB -->
+  <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+  <div class="container title">
+      <p style="font-weight: 600; font-size: 20px;">C-ITS 응급구조지원시스템</p>
+  </div>
+  <style type="text/css">
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+        .container {
+            font-family: 'Pretendard-Regular';
+        }
+    </style>
 """
 st.markdown(htmlTitle, unsafe_allow_html=True)
+
 ## 병원 위치 시각화
 address = st.text_input('현재 위치를 입력하세요. (도로명 주소)', '부산광역시 사하구 낙동대로550번길 37')
 if 'address' not in st.session_state:
