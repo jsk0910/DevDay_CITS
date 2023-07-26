@@ -53,6 +53,7 @@ def readData():
     
   G = nx.Graph()
   for item in db.code_A.find():
+    st.write(item)
     G = makeGraph(item, G)
   for item in db.code_B.find():
     G = makeGraph(item, G)
