@@ -74,6 +74,7 @@ def getDepartment(possible_departments:list):
       for node in G.nodes:
         if code in node:
           data = list(dict(G_A[node]).keys())
+          st.write(data)
           for d in data:
             d.split(', ')
             for i in d:
@@ -168,7 +169,6 @@ def main():
   possible_departments = []
   for k in step2_list:
     st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
-    st.write(st.session_state.mergeCode)
     possible_departments = getDepartment(possible_departments)
   st.session_state.possible_departments = possible_departments
   st.write(st.session_state.possible_departments)
