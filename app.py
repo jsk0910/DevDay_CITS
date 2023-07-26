@@ -64,7 +64,7 @@ def readData():
 
 # func: make graph with NetworkX
 def makeGraph(item, G):
-  G.add_edge(item['firstCode'] + item['secondCode'] + item['thirdCode'] + item['fourthCode'], item['description'].split(', ')[2] + ' ' + str(item['level']) + ' ' + item['description'].split(', ')[3])
+  G.add_edge(item['firstCode'] + item['secondCode'] + item['thirdCode'] + item['fourthCode'], item['description'].split(', ')[2] + '|' + str(item['level']) + '|' + item['description'].split(', ')[3])
   return G
 
 def getDepartment(possible_departments:list):
@@ -190,13 +190,13 @@ def main():
   st.markdown(html1, unsafe_allow_html=True)
   for i in st.session_state.possible_departments:
     st.write(i)
-    emerCode = int(i.split()[1])
+    emerCode = int(i.split('|')[1])
     html2 = f"""
           <tbody>
             <tr class="{'table-warning' if emerCode > 3 else 'table-danger'}">
-              <th class="row">i.split()[0]</th>
-              <td>i.split()[2]</td>
-              <td>i.split()[1]</td>
+              <th class="row">i.split('|')[0]</th>
+              <td>i.split('|')[2]</td>
+              <td>i.split('|')[1]</td>
             </tr>
           </tbody>
     """
