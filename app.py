@@ -78,6 +78,7 @@ def getDepartment(possible_departments:list):
             d.split(', ')
             for i in d:
               possible_departments.append(d)
+    return possible_departments
     
 def main():
   # Streamlit App Setting
@@ -165,7 +166,7 @@ def main():
   possible_departments = []
   for k in step2_list:
     st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
-    getDepartment(possible_departments)
+    possible_departments = getDepartment(possible_departments)
   st.write(possible_departments)
   
   '''
