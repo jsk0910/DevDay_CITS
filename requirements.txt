@@ -8,3 +8,4 @@ networkx
 folium
 streamlit-folium
 scikit-learn
+openai
