@@ -189,12 +189,11 @@ def main():
           <tbody>
   """
   st.markdown(html1, unsafe_allow_html=True)
-  warning = '"table-warning"'
-  danger = '"table-danger"'
+  
   for i in st.session_state.possible_departments:
     emerCode = int(i.split('|')[1])
     html2 = """
-            <tr class='"""+f"{warning if emerCode > 3 else danger}"+f"""'>
+            <tr class='"""+f"{'table-waring' if emerCode > 3 else 'table-danger'}"+f"""'>
               <th class="row">i.split('|')[0]</th>
               <td>i.split('|')[2]</td>
               <td>i.split('|')[1]</td>
