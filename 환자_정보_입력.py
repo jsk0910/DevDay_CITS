@@ -1,6 +1,7 @@
 # --- import modules start ---
 # import streamlit 
 import streamlit as st
+from streamlit_extras.switch_page_button import switch_page
 
 # import data analysis modules
 import pandas as pd
