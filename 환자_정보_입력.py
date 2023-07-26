@@ -208,6 +208,7 @@ def main():
       
       # GPT 진료과 도출
       gpt_answer = st.session_state.gpt_answer
+      bard = st.session_state.bard
 
       if gpt_answer == []:
         with st.spinner('진료과 도출 중...'):
