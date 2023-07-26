@@ -28,7 +28,7 @@ import math
 import re
 import os
 
-from bardapi import Bard
+import openai
 
 from src.database import *
 
@@ -83,10 +83,8 @@ def getDepartment(possible_departments:list):
         data = list(dict(G[node]).keys())
         return data[0]
 
-def connectBard():
-  #bard = Bard(token=st.secrets.BARD_KEY)
-  os.environ['_BARD_API_KEY']="YQhACbFGoLJidBL3QisUB_ojuuGFR22ckaVLfz5Zr_-9fqp08ShohcOc8BF_MlqFr2uVTw."
-  #return bard
+def connectOpenAI():
+  openai.api_key = st.secrets.GPT_KEY
 
 # func: main UI
 def main():
@@ -210,16 +208,28 @@ def main():
       
       # GPT 진료과 도출
       gpt_answer = st.session_state.gpt_answer
-      bard = st.session_state.bard
 
       if gpt_answer == []:
         with st.spinner('진료과 도출 중...'):
+          model = "gpt-3.5-turbo"
+          j = 0
           for i in kindOfdepart:
+            j += 1
             if i.split('|')[0] not in firstCodeOfDepart:
               firstCodeOfDepart.append(i.split('|')[0])
               query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 하니? 진료과만 알려줘"
-              response = Bard().get_answer(query)['content']
-              gpt_answer.append(response)
+              messages = [
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": query}
+              ]
+        
+              response = openai.ChatCompletion.create(
+                  model=model,
+                  messages=messages
+              )
+              gpt_answer.append(response['choices'][0]['message']['content'])
+              if j == 3:
+                break
       st.write(gpt_answer)
       #for i in gpt_answer:
         
@@ -228,8 +238,7 @@ if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
   if 'sessionState' not in st.session_state: # 세션 코드가 없는 경우
     initializeApp() # 앱 초기화
-    connectBard()
-    #st.session_state.bard = bard
+    connectOpenAI()
     
   # Set Data
   if 'G' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state: # 그래프, 감염여부 코드, 병원 정보 중 하나라도 없는 경우
