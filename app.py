@@ -58,7 +58,10 @@ def readData():
     G = makeGraph(item, G)
 
   st.session_state.G = G # 세션 저장
-  nx.draw(G)
+  fig, ax = plt.subplots()
+  pos = nx.kamada_kawai_layout(G)
+  nx.draw(G,pos, with_labels=True)
+  st.pyplot(fig)
 
 # func: make graph with NetworkX
 def makeGraph(item, G):
