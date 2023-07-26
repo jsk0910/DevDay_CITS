@@ -169,7 +169,10 @@ def main():
         st.session_state.mergeCode = k['firstCode'] + k['secondCode'] + k['thirdCode'] + k['fourthCode']
         possible_departments.append(getDepartment(possible_departments))
       st.session_state.possible_departments = set(possible_departments)
-      st.write(st.session_state.possible_departments)
+
+  # 진료과 출력
+  for i in st.session_state.possible_departments:
+    st.write(str(i).split())
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
