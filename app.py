@@ -177,12 +177,24 @@ def main():
       <p>각 증상과 응급도 입니다.</p>
       <p><small>*응급도는 1~5이며 1이 가장 응급 상황입니다.</small></p>
     </div>
+    <div class="container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">증상 종류</th>
+              <th scope="col">상세 증상</th>
+              <th scope="col">응급도 코드</th>
+            </tr>
+          </thead>
   """
   st.markdown(html1, unsafe_allow_html=True)
   for i in st.session_state.possible_departments:
     st.write(i)
     html2 = f"""
-      <div class="container">
+          <tbody>
+            <tr class="{}"></tr>
+          </tbody>
+        </table>
         <p>증상: {str(i).split()[0]} 응급도: {str(i).split()[1]}</p>
       </div>
     """
