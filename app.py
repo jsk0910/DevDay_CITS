@@ -50,8 +50,9 @@ def readDB():
 # func: read Data from Repository
 def readData():
   db = readDB()
+  st.write(db)
     
-  G = nx.Graph()
+  G = st.session_state.G
   for item in db.code_A.find():
     st.write(item)
     G = makeGraph(item, G)
