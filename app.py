@@ -180,6 +180,7 @@ def main():
   """
   st.markdown(html1, unsafe_allow_html=True)
   for i in st.session_state.possible_departments:
+    st.write(i)
     html2 = f"""
       <div class="container">
         <p>증상: {str(i).split()[0]} 응급도: {str(i).split()[1]}</p>
