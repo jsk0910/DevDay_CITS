@@ -144,7 +144,7 @@ if 'r' not in st.session_state or address != st.session_state.old_address:
     r = routeHospital(G_map, orig, [[min.iloc[0]['경도'], min.iloc[0]['위도']],[min.iloc[1]['경도'], min.iloc[1]['위도']], [min.iloc[2]['경도'], min.iloc[2]['위도']]])
   for _, row in df_hospital.iterrows():
     folium.Marker(location = [row['위도'], row['경도']],
-            popup=row['의료기관명'],
+            popup=folium.Popup(f"{row['의료기관명']}\n전화번호: {row['전화번호']}"),
             tooltip=row['의료기관명'],
             icon=folium.Icon(color='red',icon='plus')
           ).add_to(r)
@@ -161,7 +161,7 @@ if 'r' not in st.session_state or address != st.session_state.old_address:
                 icon=folium.Icon(color='green')
                ).add_to(r)
   folium.Marker(location = [df_hospital[df_hospital['의료기관명'] == '부산대학교병원']['위도'], df_hospital[df_hospital['의료기관명'] == '부산대학교병원']['경도']],
-                popup = "부산대학교 권역외상센터",
+                popup = folium.Popup("부산대학교 권역외상센터", max_width=250),
                 tooltip = "부산대학교 권역외상센터",
                 icon=folium.Icon(color='black', icon='star')
                ).add_to(r)
