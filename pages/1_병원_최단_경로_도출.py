@@ -74,7 +74,7 @@ htmlTitle = """
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
   <div class="container title">
-      <p style="font-weight: 600; font-size: 20px;">C-ITS 응급환자이송지원시스템&nbsp;<span class="badge badge-primary">prototype</span></p>
+      <p style="font-weight: 800; font-size: 30px;">C-ITS 응급환자이송지원시스템&nbsp;<span class="badge badge-primary">prototype</span></p>
       <p style="font-weight: 600; font-size: 20px;">병원 최단 경로 도출</p>
   </div>
   <style type="text/css">
