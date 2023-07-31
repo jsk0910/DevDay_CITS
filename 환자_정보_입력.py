@@ -239,7 +239,7 @@ def main():
       else:
         st.write(gpt_answer)
 
-      dep = re.findall(r'과+', gpt_answer[0])
+      dep = re.findall(r'\s과+', gpt_answer[0])
       st.write(dep)
 
       if st.button('적합한 병원 경로 확인하기'):
