@@ -239,6 +239,9 @@ def main():
       else:
         st.write(gpt_answer)
 
+      dep = re.findall(r'*과')
+      st.write(dep)
+
       if st.button('적합한 병원 경로 확인하기'):
         switch_page("병원_최단_경로_도출")
 
