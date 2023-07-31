@@ -212,26 +212,32 @@ def main():
 
       if gpt_answer == []:
         with st.spinner('진료과 도출 중...'):
-          model = "gpt-3.5-turbo"
-          j = 0
-          for i in kindOfdepart:
-            j += 1
-            if i.split('|')[0] not in firstCodeOfDepart:
-              firstCodeOfDepart.append(i.split('|')[0])
-              query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 하니? 진료과만 알려줘"
-              messages = [
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": query}
-              ]
-        
-              response = openai.ChatCompletion.create(
-                  model=model,
-                  messages=messages
-              )
-              gpt_answer.append(response['choices'][0]['message']['content'])
-              if j == 3:
-                break
-      st.write(gpt_answer)
+          try:
+            model = "gpt-3.5-turbo"
+            j = 0
+            for i in kindOfdepart:
+              j += 1
+              if i.split('|')[0] not in firstCodeOfDepart:
+                firstCodeOfDepart.append(i.split('|')[0])
+                query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 하니? 진료과만 알려줘"
+                messages = [
+                  {"role": "system", "content": "You are a helpful assistant."},
+                  {"role": "user", "content": query}
+                ]
+          
+                response = openai.ChatCompletion.create(
+                    model=model,
+                    messages=messages
+                )
+                gpt_answer.append(response['choices'][0]['message']['content'])
+                if j == 3:
+                  break
+            except:
+              gpt_answer.append("Error")
+      if gpt_answer[0] == "Error":
+        st.write("GPT Error")
+      else:
+        st.write(gpt_answer)
 
       if st.button('적합한 병원 경로 확인하기'):
         switch_page("병원_최단_경로_도출")
