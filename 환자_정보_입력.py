@@ -239,7 +239,7 @@ def main():
       else:
         st.write(gpt_answer)
 
-      p = re.complie(r'과+$')
+      p = re.compile(r'과+$')
       dep = p.search(gpt_answer[0])
       st.write(dep)
 
