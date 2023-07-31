@@ -241,8 +241,6 @@ def main():
 
       if st.button('적합한 병원 경로 확인하기'):
         switch_page("병원_최단_경로_도출")
-      #for i in gpt_answer:
-        
 
 if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
