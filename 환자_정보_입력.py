@@ -232,8 +232,8 @@ def main():
                 gpt_answer.append(response['choices'][0]['message']['content'])
                 if j == 3:
                   break
-            except:
-              gpt_answer.append("Error")
+          except:
+            gpt_answer.append("Error")
       if gpt_answer[0] == "Error":
         st.write("GPT Error")
       else:
