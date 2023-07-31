@@ -234,12 +234,12 @@ def main():
                   break
           except:
             gpt_answer.append("Error")
-      if gpt_answer[0] == "Error":
-        st.write("GPT Error")
-      else:
-        st.write(gpt_answer)
-
-      dep = re.compile(r'[가-힣]+과+').findall(gpt_answer[0])
+            
+      dep = []
+      for g in gpt_answer:
+        if g != "Error":
+          dep.append(re.compile(r'[가-힣]+과+').findall(gpt_answer[0]))
+      
       st.write(dep)
 
       if st.button('적합한 병원 경로 확인하기'):
