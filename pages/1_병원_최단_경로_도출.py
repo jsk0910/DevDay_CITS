@@ -1,3 +1,5 @@
+# --- import modules start ---
+# import streamlit modules
 import streamlit as st
 from streamlit_folium import st_folium
 
@@ -17,6 +19,8 @@ import json
 import requests
 import math
 
+# --- import modules end ---
+
 # func: address to lat, lon
 def addr_to_lat_lon(addr):
   url = f"https://dapi.kakao.com/v2/local/search/address.json?query={addr}"
@@ -25,7 +29,7 @@ def addr_to_lat_lon(addr):
   match_first = result['documents'][0]['address']
   return float(match_first['y']), float(match_first['x'])
 
-# 병원 도출 함수
+# func: calculate distance from user's location to whole hospital
 def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, center: 현재 위치
   df_distance = df
   distance_list = []
@@ -41,7 +45,7 @@ def calculate_distance(df): # df: 병원, latlon: 병원의 위경도 좌표, ce
 
   return df_distance
 
-## 최단 경로 시각화
+# func: visualization shortest paths to hospital, return : foliumMap
 def routeHospital(G, orig, dest):
   dest1 = ox.distance.nearest_nodes(G, X=dest[0][0], Y=dest[0][1])
   dest2 = ox.distance.nearest_nodes(G, X=dest[1][0], Y=dest[1][1])
@@ -54,7 +58,8 @@ def routeHospital(G, orig, dest):
   r = ox.plot_route_folium(G, route2, route_map=r, popup_attribute='length', zoom=13, color="green")
   r = ox.plot_route_folium(G, route3, route_map=r, popup_attribute='length', zoom=13, color="blue")
   return r
-
+  
+# main
 # title
 htmlTitle = """
   <!-- Font Awesome -->
@@ -91,7 +96,7 @@ htmlTitle = """
 """
 st.markdown(htmlTitle, unsafe_allow_html=True)
 
-## 병원 위치 시각화
+# visualize location of hospital병원 위치 시각화
 address = st.text_input('현재 위치를 입력하세요. (도로명 주소)', '부산광역시 사하구 낙동대로550번길 37')
 with st.spinner('지도 로딩 중...'):
   if 'address' not in st.session_state:
