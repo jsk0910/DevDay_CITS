@@ -110,6 +110,8 @@ with st.spinner('지도 로딩 중...'):
   if 'center' not in st.session_state or address != st.session_state.old_address:
     st.session_state.center = list(addr_to_lat_lon(address))
   center = st.session_state.center
+
+  # calculate distance between user's location and hospital
   if 'df_hospital_distance' not in st.session_state or address != st.session_state.old_address:
     df_hospital_distance = calculate_distance(df_hospital)
     st.session_state.df_hospital_distance = df_hospital_distance
