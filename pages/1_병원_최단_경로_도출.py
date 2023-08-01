@@ -105,7 +105,8 @@ with st.spinner('지도 로딩 중...'):
     st.session_state.old_address = st.session_state.address
     st.session_state.address = address
   df_hospital = st.session_state.df_hospital
-  
+
+  # calculate location of user with Kakao API
   if 'center' not in st.session_state or address != st.session_state.old_address:
     st.session_state.center = list(addr_to_lat_lon(address))
   center = st.session_state.center
@@ -113,7 +114,8 @@ with st.spinner('지도 로딩 중...'):
     df_hospital_distance = calculate_distance(df_hospital)
     st.session_state.df_hospital_distance = df_hospital_distance
   df_hospital_distance = st.session_state.df_hospital_distance
-  
+
+  # make basic map
   if 'G_map' not in st.session_state:
     G_map = ox.graph_from_place('부산, 대한민국', network_type='drive', simplify=False)
     G_map = ox.speed.add_edge_speeds(G_map)
@@ -130,7 +132,8 @@ with st.spinner('지도 로딩 중...'):
   style = {'color': '#1A19AC', 'weight':'1'}
   min = df_hospital_distance.sort_values(by="distance")
   st.session_state.min = min
-  
+
+  # 진료과목
   if 'departments' in st.session_state:
     departments = st.session_state.departments
     try:
@@ -143,6 +146,7 @@ with st.spinner('지도 로딩 중...'):
     except:
       min = st.session_state.min
 
+# Display shortest path and Pin on Map
 if 'r' not in st.session_state or address != st.session_state.old_address:
   newline = '\n'
   orig = st.session_state.orig
