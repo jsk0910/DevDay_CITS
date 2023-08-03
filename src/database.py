@@ -9,5 +9,11 @@ def connectDB(password):
   return db
   
 # use hospital collection Create
-def createHospitalInformation(hospitalName):
+def createHospitalInformation(hospitalName, address, lat, lon, tel, bed, room, dep, realbed):
+  pass
+
+def updateHospitalInformation():
+  pass
+
+def deleteHospitalInformation():
   pass
