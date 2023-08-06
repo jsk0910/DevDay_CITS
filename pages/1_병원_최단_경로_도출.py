@@ -1,4 +1,4 @@
-# --- import modules start ---
+# --- import modules start --- #
 # import streamlit modules
 import streamlit as st
 from streamlit_folium import st_folium
@@ -19,7 +19,7 @@ import json
 import requests
 import math
 
-# --- import modules end ---
+# --- import modules end --- #
 
 # func: address to lat, lon
 def addr_to_lat_lon(addr):
