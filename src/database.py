@@ -12,8 +12,10 @@ def connectDB(password):
 def createHospitalInformation(hospitalName, address, lat, lon, tel, bed, room, dep, realbed):
   pass
 
+# Update Hospital Info
 def updateHospitalInformation():
   pass
 
+# Delete Hospital Info
 def deleteHospitalInformation():
   pass
