@@ -136,7 +136,7 @@ with st.spinner('지도 로딩 중...'):
   st.session_state.min = min
 
   # 진료과목
-  if 'departments' in st.session_state:
+  if 'dept' in st.session_state:
     departments = st.session_state.dept
     try:
       depart = ""
