@@ -217,9 +217,9 @@ def main():
             model = "gpt-3.5-turbo"
             j = 0
             for i in kindOfdepart:
-              st.write(i)
               j += 1
               if i.split('|')[0] not in firstCodeOfDepart:
+                st.write(i)
                 firstCodeOfDepart.append(i.split('|')[0])
                 query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 하니? 진료과만 알려줘"
                 messages = [
