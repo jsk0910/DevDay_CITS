@@ -233,8 +233,8 @@ def main():
                 )
                 st.write(response)
                 gpt_answer.append(response['choices'][0]['message']['content'])
-                if j == 3:
-                  break
+              if j == 3:
+                break
           except:
             gpt_answer.append("Error")
 
