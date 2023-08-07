@@ -1,5 +1,8 @@
 # --- import modules start --- #
 # import streamlit
+import streamlit as st
+from streamlit_extras.switch_page_button import switch_page
+
 # import another modules
 import json
 import math
@@ -14,19 +17,23 @@ import matplotlib.cm as cm
 import matplotlib.colors as colors
 import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt
+
 # GIS modules
 import networkx as nx
+
 # import openai for GPT3.5
 import openai
+
+# import osmnx
 import osmnx as ox
+
 # import data analysis modules
 import pandas as pd
 # import mongodb module
 import pymongo
+
 import requests
-import streamlit as st
 from src.database import *
-from streamlit_extras.switch_page_button import switch_page
 
 # --- import modules end --- #
 
