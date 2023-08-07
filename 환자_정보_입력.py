@@ -221,6 +221,7 @@ def main():
               if i.split('|')[0] not in firstCodeOfDepart:
                 firstCodeOfDepart.append(i.split('|')[0])
                 query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 하니? 진료과만 알려줘"
+                st.write(query)
                 messages = [
                   {"role": "system", "content": "You are a helpful assistant."},
                   {"role": "user", "content": query}
