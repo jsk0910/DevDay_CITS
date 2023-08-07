@@ -211,7 +211,7 @@ def main():
       # GPT 진료과 도출
       gpt_answer = st.session_state.gpt_answer
 
-      if gpt_answer == [] or gpt_answer[0] == 'Error':
+      if gpt_answer == [] or gpt_answer[0] == "Error":
         with st.spinner('진료과 도출 중...'):
           try:
             model = "gpt-3.5-turbo"
@@ -240,7 +240,7 @@ def main():
       dep = []
       for g in gpt_answer:
         if g != "Error":
-          dep.append(re.compile(r'[가-힣]과+').findall(gpt_answer[0]))
+          dep.append(re.compile(r'[가-힣]과+').findall(g[0]))
       
       st.session_state.dep = dep
       st.write(dep)
