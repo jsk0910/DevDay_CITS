@@ -223,7 +223,7 @@ def main():
                                     messages=messages
                                 )
                                 st.write('response: '+response)
-                                gpt_answer.append(response['choices'][0]['message']['content'])
+                                gpt_answer.append(response.choices[0].message.content)
                             if j == 3:
                                 break
                     except:
