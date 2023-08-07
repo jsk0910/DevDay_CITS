@@ -242,7 +242,7 @@ def main():
                     dep.append(re.compile(r'[가-힣]+과+').findall(g))
 
             for d in dep:
-                st.write(d)
+                st.write(set(d))
 
             st.session_state.dep = dep
             st.write(dep)
