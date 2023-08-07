@@ -217,6 +217,7 @@ def main():
             model = "gpt-3.5-turbo"
             j = 0
             for i in kindOfdepart:
+              st.write(i)
               j += 1
               if i.split('|')[0] not in firstCodeOfDepart:
                 firstCodeOfDepart.append(i.split('|')[0])
