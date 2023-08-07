@@ -236,7 +236,7 @@ def main():
                             if j == 3:
                                 break
                     except OpenAIError as e:
-                        st.write("Error: " + e)
+                        st.write(e)
                         gpt_answer.append("Error")
 
             st.write(gpt_answer)
