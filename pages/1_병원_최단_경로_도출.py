@@ -141,10 +141,10 @@ with st.spinner('지도 로딩 중...'):
   else:
     departements = []
 
-  st.write(departments)
   try:
     depart = ""
     for i in departments:
+      st.write(i)
       depart += i
       depart += '|'
     depart += '내과'
