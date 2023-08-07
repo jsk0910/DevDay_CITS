@@ -222,7 +222,6 @@ def main():
                                 firstCodeOfDepart.append(i.split('|')[0])
                                 query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 해?"
                                 messages = [
-                                    
                                     {"role": "user", "content": query}
                                 ]
                                 response = None
@@ -230,8 +229,6 @@ def main():
                                     model="gpt-3.5-turbo",
                                     messages=messages
                                 )
-                                
-                                st.write(response)
                                 gpt_answer.append(response.choices[0].message.content)
                             if j == 3:
                                 break
