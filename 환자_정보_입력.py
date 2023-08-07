@@ -224,11 +224,12 @@ def main():
                                     {"role": "system", "content": "You are a helpful assistant."},
                                     {"role": "user", "content": query}
                                 ]
+                                response = None
                                 response = openai.ChatCompletion.create(
-                                    model=model,
+                                    model="gpt-3.5-turbo",
                                     messages=messages
                                 )
-                                #st.write('response: '+response)
+                                
                                 st.write(response)
                                 gpt_answer.append(response.choices[0].message.content)
                             if j == 3:
