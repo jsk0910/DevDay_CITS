@@ -218,7 +218,6 @@ def main():
                                     {"role": "system", "content": "You are a helpful assistant."},
                                     {"role": "user", "content": query}
                                 ]
-                                st.write(messages)
                                 response = openai.ChatCompletion.create(
                                     model=model,
                                     messages=messages
