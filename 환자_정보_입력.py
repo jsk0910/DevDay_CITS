@@ -239,7 +239,7 @@ def main():
       dep = []
       for g in gpt_answer:
         if g != "Error":
-          dep.append(re.compile(r'[가-힣]+과+').findall(gpt_answer[0]))
+          dep.append(re.compile(r'[가-힣]과+').findall(gpt_answer[0]))
       
       st.session_state.dep = dep
       st.write(dep)
