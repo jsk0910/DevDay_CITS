@@ -140,6 +140,8 @@ with st.spinner('지도 로딩 중...'):
     departments = st.session_state.dept
   else:
     departements = []
+
+  st.write(departments)
   try:
     depart = ""
     for i in departments:
