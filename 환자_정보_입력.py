@@ -241,11 +241,12 @@ def main():
                 if g != "Error":
                     dep.append(re.compile(r'[가-힣]+과+').findall(g))
 
+            dept = []
             for d in dep:
-                st.write(set(d))
+                dept.append(set(d))
 
             st.session_state.dep = dep
-            st.write(dep)
+            st.write(dept)
 
             if st.button('적합한 병원 경로 확인하기'):
                 switch_page("병원_최단_경로_도출")
