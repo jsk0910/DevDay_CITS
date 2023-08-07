@@ -210,6 +210,7 @@ def main():
       
       # GPT 진료과 도출
       gpt_answer = st.session_state.gpt_answer
+      st.write(gpt_answer)
 
       if gpt_answer == [] or gpt_answer[0] == "Error":
         with st.spinner('진료과 도출 중...'):
