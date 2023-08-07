@@ -144,10 +144,10 @@ with st.spinner('지도 로딩 중...'):
   try:
     depart = ""
     for i in departments:
-      st.write(i)
-      depart += i
-      depart += '|'
-    depart += '내과'
+      for j in i:
+        depart += j
+        depart += '|'
+    #depart += '내과'
     st.write(depart)
     min = min[min['진료과목'].str.contains(depart)]
   except:
