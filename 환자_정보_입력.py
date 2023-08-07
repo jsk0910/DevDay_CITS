@@ -218,7 +218,6 @@ def main():
                         for i in kindOfdepart:
                             j += 1
                             if i.split('|')[0] not in firstCodeOfDepart:
-                
                                 firstCodeOfDepart.append(i.split('|')[0])
                                 query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 해?"
                                 messages = [
@@ -230,6 +229,7 @@ def main():
                                     messages=messages
                                 )
                                 #st.write('response: '+response)
+                                st.write(response)
                                 gpt_answer.append(response.choices[0].message.content)
                             if j == 3:
                                 break
