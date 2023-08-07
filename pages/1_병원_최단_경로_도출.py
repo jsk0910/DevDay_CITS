@@ -138,16 +138,18 @@ with st.spinner('지도 로딩 중...'):
   # 진료과목
   if 'dept' in st.session_state:
     departments = st.session_state.dept
-    try:
-      depart = ""
-      for i in departments:
-        depart += i
-        depart += '|'
-      depart += '내과'
-      st.write(depart)
-      min = min[min['진료과목'].str.contains(depart)]
-    except:
-      min = st.session_state.min
+  else:
+    departements = []
+  try:
+    depart = ""
+    for i in departments:
+      depart += i
+      depart += '|'
+    depart += '내과'
+    st.write(depart)
+    min = min[min['진료과목'].str.contains(depart)]
+  except:
+    min = st.session_state.min
 
 # Display shortest path and Pin on Map
 if 'r' not in st.session_state or address != st.session_state.old_address:
