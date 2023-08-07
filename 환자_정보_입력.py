@@ -85,15 +85,11 @@ def getDepartment(possible_departments:list):
         data = list(dict(G[node]).keys())
         return data[0]
 
-def connectOpenAI():
-  openai.api_key = st.secrets.GPT_KEY
-  return openai
-
 # func: main UI
 def main():
   # Streamlit App Setting
   db = readDB()
-  openai = st.session_state.openai
+  openai.api_key = st.secrets.GPT_KEY
 
   # Title
   htmlTitle="""
@@ -256,7 +252,6 @@ if __name__ == "__main__":
   st.set_page_config(page_title="C-ITS", layout="wide")
   if 'sessionState' not in st.session_state: # 세션 코드가 없는 경우
     initializeApp() # 앱 초기화
-    st.session_state.openai = connectOpenAI()
     
   # Set Data
   if 'G' not in st.session_state or 'df_code' not in st.session_state or 'df_hospital' not in st.session_state: # 그래프, 감염여부 코드, 병원 정보 중 하나라도 없는 경우
