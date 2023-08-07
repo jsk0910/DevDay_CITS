@@ -210,7 +210,6 @@ def main():
       
       # GPT 진료과 도출
       gpt_answer = st.session_state.gpt_answer
-      st.write(gpt_answer)
 
       if gpt_answer == [] or gpt_answer[0] == "Error":
         with st.spinner('진료과 도출 중...'):
@@ -222,7 +221,6 @@ def main():
               if i.split('|')[0] not in firstCodeOfDepart:
                 firstCodeOfDepart.append(i.split('|')[0])
                 query = i.replace('|', ', ') + "증상이 있는 환자는 어느 과에서 진료를 받아야 하니? 진료과만 알려줘"
-                st.write(query)
                 messages = [
                   {"role": "system", "content": "You are a helpful assistant."},
                   {"role": "user", "content": query}
@@ -232,6 +230,7 @@ def main():
                     model=model,
                     messages=messages
                 )
+                st.write(response)
                 gpt_answer.append(response['choices'][0]['message']['content'])
                 if j == 3:
                   break
