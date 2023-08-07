@@ -241,7 +241,8 @@ def main():
                 if g != "Error":
                     dep.append(re.compile(r'[가-힣]+과+').findall(g))
 
-            dep = set(dep)
+            for d in dep:
+                st.write(d)
 
             st.session_state.dep = dep
             st.write(dep)
