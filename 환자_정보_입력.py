@@ -222,7 +222,7 @@ def main():
                                     model=model,
                                     messages=messages
                                 )
-                                st.write(response)
+                                st.write('response: '+response)
                                 gpt_answer.append(response['choices'][0]['message']['content'])
                             if j == 3:
                                 break
