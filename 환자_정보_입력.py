@@ -235,7 +235,8 @@ def main():
                   break
           except:
             gpt_answer.append("Error")
-            
+
+      st.write(gpt_answer)
       dep = []
       for g in gpt_answer:
         if g != "Error":
