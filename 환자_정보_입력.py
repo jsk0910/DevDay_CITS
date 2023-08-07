@@ -242,7 +242,7 @@ def main():
                     dep.append(re.compile(r'[가-힣]+과+').findall(g))
 
             st.session_state.dep = dep
-            st.write(set(dep))
+            st.write(dep)
 
             if st.button('적합한 병원 경로 확인하기'):
                 switch_page("병원_최단_경로_도출")
