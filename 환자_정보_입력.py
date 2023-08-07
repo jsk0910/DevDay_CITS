@@ -245,8 +245,7 @@ def main():
             for d in dep:
                 dept.append(set(d))
 
-            st.session_state.dep = dep
-            st.write(dept[0])
+            st.session_state.dept = dept
 
             if st.button('적합한 병원 경로 확인하기'):
                 switch_page("병원_최단_경로_도출")
