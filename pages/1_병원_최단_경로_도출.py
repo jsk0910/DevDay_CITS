@@ -151,7 +151,7 @@ with st.spinner('지도 로딩 중...'):
   except:
     min = st.session_state.min
 
-# Display shortest path and Pin on Map
+# Display shortest path and Pin on Map 
 if 'r' not in st.session_state or address != st.session_state.old_address:
   newline = '\n'
   orig = st.session_state.orig
