@@ -247,6 +247,7 @@ def main():
 
             st.session_state.dept = dept
 
+            # next button
             if st.button('적합한 병원 경로 확인하기'):
                 switch_page("병원_최단_경로_도출")
 
