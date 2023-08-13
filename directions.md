@@ -6,12 +6,12 @@ C-ITS는 아래와 같은 기능을 제공합니다.
 
 ## 사용방법
 1. 환자 나이 선택하기
-![age](/assets/STEP1_환자나이선택.gif)
+![age](/assets/STEP1.gif)
     
 2. 증상 키워드로 입력하기   
 > 💡 증상 키워드를 세분화 해서 써주시면 다음 단계의 “응급 상황정보 선택”에 있어 선택지가 줄어 시간 단축이 가능합니다.
      
-![card](/assets/STEP2_증상키워드입력.gif)
+![card](/assets/STEP2.gif)
       
 3. 응급 상황 정보 선택하기
 ![situation](/assets/STEP3.gif)
