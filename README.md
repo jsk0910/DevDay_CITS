@@ -6,7 +6,7 @@
 
 ![graph](/assets/README_Header.gif)
 
-사용법 요약:
+[사용법](directions.md) 요약:
 1. 환자 나이 선택
 2. 증상 키워드 입력
 3. 응급 상황 정보 선택
