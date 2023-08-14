@@ -35,4 +35,4 @@
 본 프로젝트는 networkx를 이용해 만들어진 증상과 진료과 간의 그래프를 통해 환자에 적합한 진료과를 탐색합니다. 그리고 **해당 진료과가 있는 병원 중 가장 가까운 거리에 있는 3개의 병원에 대한 최단 경로를 표시합니다.**
 
 ## License
-This software is under the MIT License.
+This software is under the [MIT License](LICNESE).
